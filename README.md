@@ -137,24 +137,22 @@ Configurar las siguientes variables en el backend:
 - Headers de seguridad
 ## Arranque con Docker
 
-Para levantar todo el stack:
+Para arrancar todo el stack:
 
-```bash
-powershell -ExecutionPolicy Bypass -File .\start-docker.ps1
+```powershell
+.\start-docker.ps1
 ```
 
-Servicios:
+Para detenerlo:
+
+```powershell
+.\stop-docker.ps1
+```
+
+Servicios expuestos:
 
 - Frontend: http://localhost:8081
 - Backend: http://localhost:8000
 - Base de datos: localhost:3306
 
 La primera vez, Docker importará el backup `producto-catalogo-backup-20250605.sql` en MySQL 8.
-
-
-
-Para detener el stack:
-
-```bash
-powershell -ExecutionPolicy Bypass -File .\stop-docker.ps1
-```
