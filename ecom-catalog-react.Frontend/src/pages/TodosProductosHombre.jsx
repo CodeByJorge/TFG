@@ -1,3 +1,4 @@
+﻿import config from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
@@ -6,13 +7,13 @@ import CategoryMenu from '../components/CategoryMenu';
 import './TodosProductosHombre.css';
 import { useAuth } from '../contexts/AuthContext';
 
-const API_URL = 'http://localhost:8000/api/productos/genero/nombre/Hombres';
+const API_URL = config.productGenreNameUrl('Hombres');
 
 const HeroSection = () => (
   <div className="todos-hero">
     <div className="todos-content">
       <h1>Todos los Productos</h1>
-      <p>Descubre nuestra colección completa para mujer</p>
+      <p>Descubre nuestra colecciÃ³n completa para mujer</p>
     </div>
   </div>
 );
@@ -20,8 +21,8 @@ const HeroSection = () => (
 const HeaderImage = () => (
   <div className="header-image">
     <div className="header-image-content">
-      <h2>Nueva Colección</h2>
-      <p>Descubre las últimas tendencias</p>
+      <h2>Nueva ColecciÃ³n</h2>
+      <p>Descubre las Ãºltimas tendencias</p>
     </div>
   </div>
 );
@@ -94,7 +95,7 @@ const TodosProductosHombre = () => {
     const fetchFavoritos = async () => {
       if (!isLoggedIn || !user?.token) return;
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -167,3 +168,4 @@ const TodosProductosHombre = () => {
 };
 
 export default TodosProductosHombre; 
+

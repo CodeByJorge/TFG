@@ -1,3 +1,4 @@
+﻿import config from '../config';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from './ProductCard';
@@ -20,7 +21,7 @@ const SearchResult = () => {
 
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8000/api/productos/buscar?query=${encodeURIComponent(searchQuery)}`);
+        const response = await fetch(config.productSearchUrl(searchQuery));
         
         if (!response.ok) {
           throw new Error('Error al buscar productos');
@@ -29,7 +30,7 @@ const SearchResult = () => {
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        console.error('Error en la búsqueda:', error);
+        console.error('Error en la bÃºsqueda:', error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -48,7 +49,7 @@ const SearchResult = () => {
   }
 
   if (!searchQuery) {
-    return <div className="search-empty">Ingresa un término de búsqueda</div>;
+    return <div className="search-empty">Ingresa un tÃ©rmino de bÃºsqueda</div>;
   }
 
   if (products.length === 0) {
@@ -57,7 +58,7 @@ const SearchResult = () => {
 
   return (
     <div className="search-results">
-      <h2>Resultados de búsqueda para: {searchQuery}</h2>
+      <h2>Resultados de bÃºsqueda para: {searchQuery}</h2>
       <div className="search-grid">
         {products.map((product) => (
           <ProductCard
@@ -71,3 +72,4 @@ const SearchResult = () => {
 };
 
 export default SearchResult; 
+

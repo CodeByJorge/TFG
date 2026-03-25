@@ -2,8 +2,9 @@ package com.producto.productocatalogo.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -14,9 +15,24 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-    // Clave secreta fija para firmar los tokens
-    private static final String SECRET_KEY = "tu_clave_secreta_muy_segura_y_larga_para_firmar_los_tokens_jwt_123456789";
-    private final SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+    @Value("${security.jwt.secret:}")
+    private String secretKey;
+
+    private SecretKey key;
+
+    @PostConstruct
+    void init() {
+        if (secretKey == null || secretKey.isBlank()) {
+            throw new IllegalStateException("JWT_SECRET no esta configurado");
+        }
+
+        byte[] secretBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+        if (secretBytes.length < 32) {
+            throw new IllegalStateException("JWT_SECRET debe tener al menos 32 caracteres");
+        }
+
+        key = Keys.hmacShaKeyFor(secretBytes);
+    }
 
     public String generateToken(String email, String rol) {
         Map<String, Object> claims = new HashMap<>();

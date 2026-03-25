@@ -1,3 +1,4 @@
+﻿import config from '../config';
 import React, { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,7 +7,7 @@ import CategoryMenu from '../components/CategoryMenu';
 import FilterPanel from '../components/FilterPanel';
 import './TodosProductosMujer.css';
 
-const API_URL = 'http://localhost:8000/api/productos/genero/nombre/Mujeres';
+const API_URL = config.productGenreNameUrl('Mujeres');
 
 const LoadingState = () => (
   <div className="loading">Cargando productos...</div>
@@ -76,7 +77,7 @@ const TodosProductosMujer = () => {
     const fetchFavoritos = async () => {
       if (!isLoggedIn || !user?.token) return;
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -149,3 +150,4 @@ const TodosProductosMujer = () => {
 };
 
 export default TodosProductosMujer; 
+

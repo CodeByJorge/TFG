@@ -1,3 +1,4 @@
+﻿import config from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,13 +16,13 @@ const Favoritos = () => {
   useEffect(() => {
     const fetchFavoritos = async () => {
       if (!isLoggedIn || !user?.token) {
-        setError('Debes iniciar sesión para ver tus favoritos');
+        setError('Debes iniciar sesiÃ³n para ver tus favoritos');
         setLoading(false);
         return;
       }
 
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -55,7 +56,7 @@ const Favoritos = () => {
   }
 
   if (!isLoggedIn) {
-    return <div className="error">Debes iniciar sesión para ver tus favoritos</div>;
+    return <div className="error">Debes iniciar sesiÃ³n para ver tus favoritos</div>;
   }
 
   return (
@@ -70,7 +71,7 @@ const Favoritos = () => {
       <div className="products-container">
         {favoritos.length === 0 ? (
           <div className="no-favoritos">
-            <p>No tienes productos favoritos aún</p>
+            <p>No tienes productos favoritos aÃºn</p>
           </div>
         ) : (
           <div className="products-grid">
@@ -90,3 +91,4 @@ const Favoritos = () => {
 };
 
 export default Favoritos; 
+

@@ -1,8 +1,9 @@
+﻿import config from '../config';
 /**
  * Componente PantalonesHombre
  * 
- * Este componente representa la página de pantalones para la sección de hombres.
- * Incluye una sección hero y un grid de productos.
+ * Este componente representa la pÃ¡gina de pantalones para la secciÃ³n de hombres.
+ * Incluye una secciÃ³n hero y un grid de productos.
  * 
  * @component
  * @requires React
@@ -21,18 +22,18 @@ import './PantalonesHombre.css';
  * URL base para la API de productos de pantalones de hombre
  * @constant {string}
  */
-const API_URL = 'http://localhost:8000/api/productos/categoria/14';
+const API_URL = config.productCategoryUrl(14);
 
 /**
- * Componente que renderiza la sección hero de la página
+ * Componente que renderiza la secciÃ³n hero de la pÃ¡gina
  * @component
- * @returns {JSX.Element} Sección hero con título y descripción
+ * @returns {JSX.Element} SecciÃ³n hero con tÃ­tulo y descripciÃ³n
  */
 const HeroSection = () => (
       <div className="pantalones-hombre-hero">
         <div className="pantalones-hombre-content">
           <h1>Pantalones</h1>
-          <p>Descubre nuestra colección de pantalones para hombre</p>
+          <p>Descubre nuestra colecciÃ³n de pantalones para hombre</p>
         </div>
       </div>
 );
@@ -82,9 +83,9 @@ const FilterButton = ({ onClick }) => (
 );
 
 /**
- * Componente principal de la página de pantalones
+ * Componente principal de la pÃ¡gina de pantalones
  * @component
- * @returns {JSX.Element} Página completa de pantalones
+ * @returns {JSX.Element} PÃ¡gina completa de pantalones
  */
 const PantalonesHombre = () => {
   const { user, isLoggedIn } = useAuth();
@@ -118,14 +119,14 @@ const PantalonesHombre = () => {
           product.precio <= filters.priceRange.max
         );
 
-        // Filtrar por talla si está seleccionada
+        // Filtrar por talla si estÃ¡ seleccionada
         if (filters.size) {
           filteredData = filteredData.filter(product => 
             product.tallas && product.tallas.includes(filters.size)
           );
         }
 
-        // Filtrar por color si está seleccionado
+        // Filtrar por color si estÃ¡ seleccionado
         if (filters.color) {
           filteredData = filteredData.filter(product => 
             product.color && product.color.toLowerCase() === filters.color
@@ -154,7 +155,7 @@ const PantalonesHombre = () => {
       if (!isLoggedIn || !user?.token) return;
 
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -221,3 +222,4 @@ const PantalonesHombre = () => {
 };
 
 export default PantalonesHombre; 
+

@@ -38,7 +38,6 @@ public class UsuarioController {
 
             logger.info("=== INICIO DE INTENTO DE LOGIN ===");
             logger.info("Email recibido: {}", email);
-            logger.info("Password recibido: {}", password);
 
             if (email == null || password == null) {
                 logger.error("Email o password nulos");
@@ -56,7 +55,6 @@ public class UsuarioController {
             logger.info("Usuario encontrado en BD:");
             logger.info("ID: {}", usuario.getId());
             logger.info("Email: {}", usuario.getEmail());
-            logger.info("Password en BD: {}", usuario.getPassword());
             logger.info("Rol: {}", usuario.getRol());
             
             boolean passwordMatches = passwordEncoder.matches(password, usuario.getPassword());
@@ -106,8 +104,6 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         try {
-            // Eliminamos la encriptación aquí, ya que se realiza en el servicio
-            // usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             Usuario nuevoUsuario = usuarioService.createUsuario(usuario);
             return ResponseEntity.ok(nuevoUsuario);
         } catch (RuntimeException e) {

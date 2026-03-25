@@ -1,3 +1,4 @@
+﻿import config from '../config';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
@@ -27,7 +28,7 @@ export const FavoritesProvider = ({ children }) => {
       }
 
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -56,11 +57,11 @@ export const FavoritesProvider = ({ children }) => {
       };
 
       if (favorites.includes(productId)) {
-        await axios.delete(`http://localhost:8000/api/favoritos/${productId}`, { headers });
+        await axios.delete(`${config.FAVORITES_URL}/${productId}`, { headers });
         setFavorites(prev => prev.filter(id => id !== productId));
         setFavoritesCount(prev => prev - 1);
       } else {
-        await axios.post(`http://localhost:8000/api/favoritos/${productId}`, {}, { headers });
+        await axios.post(`${config.FAVORITES_URL}/${productId}`, {}, { headers });
         setFavorites(prev => [...prev, productId]);
         setFavoritesCount(prev => prev + 1);
         
@@ -91,3 +92,4 @@ export const FavoritesProvider = ({ children }) => {
     </FavoritesContext.Provider>
   );
 }; 
+

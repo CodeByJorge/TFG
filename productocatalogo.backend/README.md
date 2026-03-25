@@ -1,6 +1,6 @@
-# Producto Catálogo Backend
+# Producto Catalogo Backend
 
-Este es el backend de la aplicación Producto Catálogo, desarrollado con Spring Boot.
+Este es el backend de la aplicacion Producto Catalogo, desarrollado con Spring Boot.
 
 ## Requisitos Previos
 
@@ -8,51 +8,53 @@ Este es el backend de la aplicación Producto Catálogo, desarrollado con Spring
 - MySQL 8.0 o superior
 - Maven
 
-## Configuración de la Base de Datos
+## Configuracion de la Base de Datos
 
 1. Crear la base de datos:
 ```sql
 CREATE DATABASE `producto-catalogo`;
 ```
 
-2. Crear el usuario y asignar permisos:
-```sql
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'Admin123!@#2024';
-GRANT ALL PRIVILEGES ON `producto-catalogo`.* TO 'admin'@'localhost';
-FLUSH PRIVILEGES;
-```
+2. Crear un usuario para la aplicacion y asignarle permisos sobre esa base de datos.
+   Usa tus propias credenciales locales, no las del repositorio.
 
 3. Restaurar la base de datos desde el backup (opcional):
 ```bash
-mysql -u admin -p producto-catalogo < producto-catalogo-backup-20250605.sql
+mysql -u tu_usuario -p producto-catalogo < producto-catalogo-backup-20250605.sql
 ```
 
-## Configuración del Proyecto
+## Configuracion del Proyecto
 
 ### Variables de Entorno
-Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
-```
-DB_USERNAME=admin
-DB_PASSWORD=Admin123!@#2024
-DB_NAME=producto-catalogo
+Crear un archivo `.env.local` en la raiz del backend con el siguiente contenido.
+Si prefieres, puedes copiar el archivo `.env.example` y renombrarlo:
+```properties
+DB_URL=jdbc:mysql://localhost:3306/producto-catalogo
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+JWT_SECRET=una_clave_larga_y_segura_de_al_menos_32_caracteres
 ```
 
-### Configuración de Spring Boot
-El archivo `application.properties` está configurado con los siguientes parámetros:
+### Configuracion de Spring Boot
+El archivo `application.properties` esta configurado para leer primero `.env.local` y luego `.env` si existen:
 ```properties
 spring.application.name=productocatalogo
 server.port=8000
 
+spring.config.import=optional:file:.env.local[.properties],optional:file:.env[.properties]
+
 # Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/producto-catalogo
-spring.datasource.username=admin
-spring.datasource.password=Admin123!@#2024
+spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/producto-catalogo}
+spring.datasource.username=${DB_USERNAME:admin}
+spring.datasource.password=${DB_PASSWORD:}
 spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# JWT Configuration
+security.jwt.secret=${JWT_SECRET:}
 
 # Logging Configuration
-logging.level.org.springframework=DEBUG
-logging.level.com.producto=DEBUG
+logging.level.org.springframework=INFO
+logging.level.com.producto=INFO
 ```
 
 ## Estructura del Proyecto
@@ -64,10 +66,14 @@ productocatalogo.backend/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── producto/
-│   │   │           ├── controller/
-│   │   │           ├── model/
-│   │   │           ├── repository/
-│   │   │           └── service/
+│   │   │           └── productocatalogo/
+│   │   │               ├── config/
+│   │   │               ├── controller/
+│   │   │               ├── exception/
+│   │   │               ├── model/
+│   │   │               ├── repository/
+│   │   │               ├── security/
+│   │   │               └── Service/
 │   │   └── resources/
 │   │       └── application.properties
 │   └── test/
@@ -76,29 +82,24 @@ productocatalogo.backend/
 └── README.md
 ```
 
-## Ejecución del Proyecto
+## Ejecucion del Proyecto
 
 1. Clonar el repositorio:
 ```bash
 git clone <url-del-repositorio>
 ```
 
-2. Navegar al directorio del proyecto:
+2. Navegar al directorio del backend:
 ```bash
 cd productocatalogo.backend
 ```
 
-3. Dar permisos de ejecución al wrapper de Maven:
-```bash
-chmod +x mvnw
-```
-
-4. Iniciar la aplicación:
+3. Iniciar la aplicacion:
 ```bash
 ./mvnw spring-boot:run
 ```
 
-La aplicación estará disponible en `http://localhost:8000`
+La aplicacion estara disponible en `http://localhost:8000`
 
 ## Endpoints de la API
 
@@ -109,30 +110,30 @@ La aplicación estará disponible en `http://localhost:8000`
 - `PUT /api/productos/{id}` - Actualizar un producto existente
 - `DELETE /api/productos/{id}` - Eliminar un producto
 
-### Categorías
-- `GET /api/categorias` - Obtener todas las categorías
-- `GET /api/categorias/{id}` - Obtener una categoría por ID
-- `POST /api/categorias` - Crear una nueva categoría
-- `PUT /api/categorias/{id}` - Actualizar una categoría existente
-- `DELETE /api/categorias/{id}` - Eliminar una categoría
+### Categorias
+- `GET /api/categorias` - Obtener todas las categorias
+- `GET /api/categorias/{id}` - Obtener una categoria por ID
+- `POST /api/categorias` - Crear una nueva categoria
+- `PUT /api/categorias/{id}` - Actualizar una categoria existente
+- `DELETE /api/categorias/{id}` - Eliminar una categoria
 
 ## Seguridad
 
-- Las credenciales de la base de datos están almacenadas en el archivo `.env`
-- El archivo `.env` está incluido en `.gitignore` para evitar que se suba al repositorio
-- Se recomienda cambiar las contraseñas en producción
+- Las credenciales de la base de datos y la clave JWT se cargan desde variables de entorno o un archivo `.env`
+- Evita dejar contraseñas o secretos escritos directamente en el codigo o en el README
+- Se recomienda usar valores distintos en desarrollo y en produccion
 
-## Solución de Problemas
+## Solucion de Problemas
 
-### Error de Conexión a la Base de Datos
-1. Verificar que MySQL esté corriendo:
+### Error de Conexion a la Base de Datos
+1. Verificar que MySQL este corriendo:
 ```bash
 sudo systemctl status mysql
 ```
 
 2. Verificar que el usuario tenga los permisos correctos:
 ```sql
-SHOW GRANTS FOR 'admin'@'localhost';
+SHOW GRANTS FOR 'tu_usuario'@'localhost';
 ```
 
 3. Verificar que la base de datos existe:
@@ -140,13 +141,13 @@ SHOW GRANTS FOR 'admin'@'localhost';
 SHOW DATABASES LIKE 'producto-catalogo';
 ```
 
-### Error al Iniciar la Aplicación
-1. Verificar que Java 17 está instalado:
+### Error al Iniciar la Aplicacion
+1. Verificar que Java 17 este instalado:
 ```bash
 java -version
 ```
 
-2. Verificar que Maven está instalado:
+2. Verificar que Maven este instalado:
 ```bash
 mvn -version
 ```
@@ -155,15 +156,3 @@ mvn -version
 ```bash
 ./mvnw clean install
 ```
-
-## Contribución
-
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles. 

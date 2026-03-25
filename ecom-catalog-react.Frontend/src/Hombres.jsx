@@ -1,3 +1,4 @@
+﻿import config from './config';
 import React, { useState, useEffect } from 'react';
 import ProductCard from './components/ProductCard';
 import { useAuth } from './contexts/AuthContext';
@@ -17,7 +18,7 @@ const Hombres = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/productos/genero/nombre/Hombres');
+        const response = await fetch(config.productGenreNameUrl('Hombres'));
         if (!response.ok) {
           throw new Error('Error al cargar los productos');
         }
@@ -38,7 +39,7 @@ const Hombres = () => {
       if (!isLoggedIn || !user?.token) return;
 
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -73,8 +74,8 @@ const Hombres = () => {
     <>
       <div className="hombres-container">
         <div className="hombres-content">
-          <h1>Colección Hombres</h1>
-          <p>Descubre nuestra nueva colección para hombres</p>
+          <h1>ColecciÃ³n Hombres</h1>
+          <p>Descubre nuestra nueva colecciÃ³n para hombres</p>
         </div>
       </div>
 
@@ -112,3 +113,4 @@ const Hombres = () => {
 };
 
 export default Hombres; 
+

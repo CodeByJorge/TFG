@@ -1,8 +1,9 @@
+﻿import config from '../config';
 /**
  * Componente Zapatos
  * 
- * Este componente representa la página de zapatos para la sección de mujeres.
- * Incluye una sección hero y un grid de productos.
+ * Este componente representa la pÃ¡gina de zapatos para la secciÃ³n de mujeres.
+ * Incluye una secciÃ³n hero y un grid de productos.
  * 
  * @component
  * @requires React
@@ -21,18 +22,18 @@ import './Zapatos.css';
  * URL base para la API de productos de zapatos de mujer
  * @constant {string}
  */
-const API_URL = 'http://localhost:8000/api/productos/categoria/12';
+const API_URL = config.productCategoryUrl(12);
 
 /**
- * Componente que renderiza la sección hero de la página
+ * Componente que renderiza la secciÃ³n hero de la pÃ¡gina
  * @component
- * @returns {JSX.Element} Sección hero con título y descripción
+ * @returns {JSX.Element} SecciÃ³n hero con tÃ­tulo y descripciÃ³n
  */
 const HeroSection = () => (
   <div className="zapatos-hero">
     <div className="zapatos-content">
       <h1>Zapatos</h1>
-      <p>Descubre nuestra colección de zapatos para mujer</p>
+      <p>Descubre nuestra colecciÃ³n de zapatos para mujer</p>
     </div>
   </div>
 );
@@ -82,9 +83,9 @@ const FilterButton = ({ onClick }) => (
 );
 
 /**
- * Componente principal de la página de zapatos
+ * Componente principal de la pÃ¡gina de zapatos
  * @component
- * @returns {JSX.Element} Página completa de zapatos
+ * @returns {JSX.Element} PÃ¡gina completa de zapatos
  */
 const Zapatos = () => {
   const { user, isLoggedIn } = useAuth();
@@ -118,14 +119,14 @@ const Zapatos = () => {
           product.precio <= filters.priceRange.max
         );
 
-        // Filtrar por talla si está seleccionada
+        // Filtrar por talla si estÃ¡ seleccionada
         if (filters.size) {
           filteredData = filteredData.filter(product => 
             product.tallas && product.tallas.includes(filters.size)
           );
         }
 
-        // Filtrar por color si está seleccionado
+        // Filtrar por color si estÃ¡ seleccionado
         if (filters.color) {
           filteredData = filteredData.filter(product => 
             product.color && product.color.toLowerCase() === filters.color
@@ -154,7 +155,7 @@ const Zapatos = () => {
       if (!isLoggedIn || !user?.token) return;
 
       try {
-        const response = await axios.get('http://localhost:8000/api/favoritos', {
+        const response = await axios.get(config.FAVORITES_URL, {
           headers: {
             'Authorization': `Bearer ${user.token}`,
             'Content-Type': 'application/json'
@@ -221,3 +222,4 @@ const Zapatos = () => {
 };
 
 export default Zapatos;
+

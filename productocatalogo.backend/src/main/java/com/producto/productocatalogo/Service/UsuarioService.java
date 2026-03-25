@@ -37,7 +37,6 @@ public class UsuarioService {
     public Usuario createUsuario(Usuario usuario) {
         logger.info("=== CREANDO NUEVO USUARIO ===");
         logger.info("Email: {}", usuario.getEmail());
-        logger.info("Password original: {}", usuario.getPassword());
         
         if (usuarioRepository.existsByEmail(usuario.getEmail())) {
             logger.error("El email ya está registrado: {}", usuario.getEmail());
@@ -45,7 +44,6 @@ public class UsuarioService {
         }
         
         String encodedPassword = passwordEncoder.encode(usuario.getPassword());
-        logger.info("Password encriptado: {}", encodedPassword);
         usuario.setPassword(encodedPassword);
         
         Usuario savedUsuario = usuarioRepository.save(usuario);
@@ -64,9 +62,7 @@ public class UsuarioService {
                     usuario.setEmail(usuarioDetails.getEmail());
                     if (usuarioDetails.getPassword() != null && !usuarioDetails.getPassword().isEmpty()) {
                         logger.info("Actualizando contraseña");
-                        logger.info("Password original: {}", usuarioDetails.getPassword());
                         String encodedPassword = passwordEncoder.encode(usuarioDetails.getPassword());
-                        logger.info("Password encriptado: {}", encodedPassword);
                         usuario.setPassword(encodedPassword);
                     }
                     Usuario updatedUsuario = usuarioRepository.save(usuario);
