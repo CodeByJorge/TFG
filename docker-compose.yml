@@ -1,0 +1,57 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: tfg-db
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: producto-catalogo
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Admin123!@#2024
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./producto-catalogo-backup-20250605.sql:/docker-entrypoint-initdb.d/01-backup.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build:
+      context: ./productocatalogo.backend
+      dockerfile: Dockerfile
+    container_name: tfg-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://db:3306/producto-catalogo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: admin
+      DB_PASSWORD: Admin123!@#2024
+      JWT_SECRET: replace-this-with-a-long-random-secret-key-123456
+      JAVA_OPTS: -Xms256m -Xmx512m
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./ecom-catalog-react.Frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: tfg-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+
+volumes:
+  mysql_data:

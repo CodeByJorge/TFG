@@ -1,35 +1,35 @@
-# Tienda de Comercio Electrónico 
+﻿# Tienda de Comercio ElectrÃ³nico 
 
-## Descripción
-Aplicación web moderna para la gestión y visualización de productos de moda, desarrollada con tecnologías actuales y siguiendo las mejores prácticas de desarrollo. El sistema permite a los usuarios explorar productos, gestionar favoritos, realizar compras y administrar su perfil, mientras que los administradores tienen acceso a un panel completo para la gestión de productos, pedidos y usuarios.
+## DescripciÃ³n
+AplicaciÃ³n web moderna para la gestiÃ³n y visualizaciÃ³n de productos de moda, desarrollada con tecnologÃ­as actuales y siguiendo las mejores prÃ¡cticas de desarrollo. El sistema permite a los usuarios explorar productos, gestionar favoritos, realizar compras y administrar su perfil, mientras que los administradores tienen acceso a un panel completo para la gestiÃ³n de productos, pedidos y usuarios.
 
-## Características Principales
+## CaracterÃ­sticas Principales
 
 ### Frontend
 - Interfaz de usuario moderna y responsiva desarrollada con React
-- Navegación intuitiva con React Router
-- Gestión de estado global con Context API
-- Diseño adaptable a diferentes dispositivos
+- NavegaciÃ³n intuitiva con React Router
+- GestiÃ³n de estado global con Context API
+- DiseÃ±o adaptable a diferentes dispositivos
 - Sistema de filtrado avanzado de productos
 - Carrito de compras en tiempo real
-- Gestión de favoritos
-- Panel de administración completo
-- Autenticación y autorización de usuarios
-- Búsqueda en tiempo real
+- GestiÃ³n de favoritos
+- Panel de administraciÃ³n completo
+- AutenticaciÃ³n y autorizaciÃ³n de usuarios
+- BÃºsqueda en tiempo real
 - Notificaciones interactivas
 
 ### Backend
 - API RESTful desarrollada con Spring Boot
 - Seguridad implementada con Spring Security y JWT
 - Persistencia de datos con JPA y MySQL
-- Gestión de usuarios y roles
-- Sistema de autenticación robusto
-- Manejo de productos y categorías
-- Gestión de pedidos
-- Validación de datos
-- Documentación de API
+- GestiÃ³n de usuarios y roles
+- Sistema de autenticaciÃ³n robusto
+- Manejo de productos y categorÃ­as
+- GestiÃ³n de pedidos
+- ValidaciÃ³n de datos
+- DocumentaciÃ³n de API
 
-## Tecnologías Utilizadas
+## TecnologÃ­as Utilizadas
 
 ### Frontend
 - React 19
@@ -54,7 +54,7 @@ Aplicación web moderna para la gestión y visualización de productos de moda, 
 ## Requisitos del Sistema
 
 ### Frontend
-- Node.js (versión 18 o superior)
+- Node.js (versiÃ³n 18 o superior)
 - npm o yarn
 - Navegador web moderno
 
@@ -63,7 +63,7 @@ Aplicación web moderna para la gestión y visualización de productos de moda, 
 - Maven
 - MySQL 8.0 o superior
 
-## Instalación
+## InstalaciÃ³n
 
 ### Frontend
 ```bash
@@ -79,7 +79,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-## Configuración
+## ConfiguraciÃ³n
 
 ### Base de Datos
 1. Crear una base de datos MySQL
@@ -95,46 +95,66 @@ Configurar las siguientes variables en el backend:
 
 ## Estructura del Proyecto
 ```
-├── ecom-catalog-react.Frontend/
-│   ├── src/
-│   │   ├── assets/           # Imágenes, íconos, etc.
-│   │   ├── components/       # Componentes reutilizables (botones, tarjetas, etc.)
-│   │   ├── context/          # Contextos de React
-│   │   ├── contexts/         # (Posible duplicado, revisar)
-│   │   ├── pages/            # Páginas del sitio
-│   │   │   └── admin/        # Panel de administración
-│   │   ├── services/         # Llamadas a la API
-│   │   ├── App.jsx           # Componente raíz
-│   │   ├── Header.jsx        # Encabezado de navegación
-│   │   ├── Cart.jsx          # Vista del carrito
-│   │   ├── config.js         # Configuración global (URL API, etc.)
-│   │   └── main.jsx          # Punto de entrada
-│   └── public/               # Archivos estáticos públicos (favicon, index.html, etc.)
-│
-└── productocatalogo.backend/
-    ├── src/
-    │   └── main/
-    │       ├── java/com/producto/productocatalogo/
-    │       │   ├── config/         # Configuraciones de CORS, Swagger, etc.
-    │       │   ├── controller/     # Endpoints REST
-    │       │   ├── exception/      # Clases para manejar errores personalizados
-    │       │   ├── model/          # Entidades JPA (Producto, Categoría, Usuario, etc.)
-    │       │   ├── repository/     # Interfaces JpaRepository
-    │       │   ├── security/       # Filtros JWT, configuración de seguridad
-    │       │   └── service/        # Servicios con lógica de negocio
-    │       └── resources/
-    │           └── application.properties
-    └── pom.xml
+â”œâ”€â”€ ecom-catalog-react.Frontend/
+â”‚   â”œâ”€â”€ src/
+â”‚   â”‚   â”œâ”€â”€ assets/           # ImÃ¡genes, Ã­conos, etc.
+â”‚   â”‚   â”œâ”€â”€ components/       # Componentes reutilizables (botones, tarjetas, etc.)
+â”‚   â”‚   â”œâ”€â”€ context/          # Contextos de React
+â”‚   â”‚   â”œâ”€â”€ contexts/         # (Posible duplicado, revisar)
+â”‚   â”‚   â”œâ”€â”€ pages/            # PÃ¡ginas del sitio
+â”‚   â”‚   â”‚   â””â”€â”€ admin/        # Panel de administraciÃ³n
+â”‚   â”‚   â”œâ”€â”€ services/         # Llamadas a la API
+â”‚   â”‚   â”œâ”€â”€ App.jsx           # Componente raÃ­z
+â”‚   â”‚   â”œâ”€â”€ Header.jsx        # Encabezado de navegaciÃ³n
+â”‚   â”‚   â”œâ”€â”€ Cart.jsx          # Vista del carrito
+â”‚   â”‚   â”œâ”€â”€ config.js         # ConfiguraciÃ³n global (URL API, etc.)
+â”‚   â”‚   â””â”€â”€ main.jsx          # Punto de entrada
+â”‚   â””â”€â”€ public/               # Archivos estÃ¡ticos pÃºblicos (favicon, index.html, etc.)
+â”‚
+â””â”€â”€ productocatalogo.backend/
+    â”œâ”€â”€ src/
+    â”‚   â””â”€â”€ main/
+    â”‚       â”œâ”€â”€ java/com/producto/productocatalogo/
+    â”‚       â”‚   â”œâ”€â”€ config/         # Configuraciones de CORS, Swagger, etc.
+    â”‚       â”‚   â”œâ”€â”€ controller/     # Endpoints REST
+    â”‚       â”‚   â”œâ”€â”€ exception/      # Clases para manejar errores personalizados
+    â”‚       â”‚   â”œâ”€â”€ model/          # Entidades JPA (Producto, CategorÃ­a, Usuario, etc.)
+    â”‚       â”‚   â”œâ”€â”€ repository/     # Interfaces JpaRepository
+    â”‚       â”‚   â”œâ”€â”€ security/       # Filtros JWT, configuraciÃ³n de seguridad
+    â”‚       â”‚   â””â”€â”€ service/        # Servicios con lÃ³gica de negocio
+    â”‚       â””â”€â”€ resources/
+    â”‚           â””â”€â”€ application.properties
+    â””â”€â”€ pom.xml
 ```
 
-## Características de Seguridad
-- Autenticación basada en JWT
-- Protección contra CSRF
-- Validación de datos
-- Sanitización de entradas
+## CaracterÃ­sticas de Seguridad
+- AutenticaciÃ³n basada en JWT
+- ProtecciÃ³n contra CSRF
+- ValidaciÃ³n de datos
+- SanitizaciÃ³n de entradas
 - Control de acceso basado en roles
-- Encriptación de contraseñas
+- EncriptaciÃ³n de contraseÃ±as
 - Headers de seguridad
+## Arranque con Docker
+
+Para levantar todo el stack:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\start-docker.ps1
+```
+
+Servicios:
+
+- Frontend: http://localhost:8081
+- Backend: http://localhost:8000
+- Base de datos: localhost:3306
+
+La primera vez, Docker importará el backup `producto-catalogo-backup-20250605.sql` en MySQL 8.
 
 
 
+Para detener el stack:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\stop-docker.ps1
+```

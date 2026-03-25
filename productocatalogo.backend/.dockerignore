@@ -1,0 +1,7 @@
+target
+backend-*.log
+*.log
+.env
+.env.local
+.git
+.gitignore
