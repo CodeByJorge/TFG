@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "dev": "npm run dev --prefix ecom-catalog-react.Frontend",
+    "build": "npm run build --prefix ecom-catalog-react.Frontend",
+    "preview": "npm run preview --prefix ecom-catalog-react.Frontend"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",

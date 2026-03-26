@@ -1,63 +1,31 @@
 .search-results {
-  padding: 1rem;
-  box-sizing: border-box;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 7rem 1.5rem 4rem;
 }
 
 .search-results h2 {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 2rem;
-  text-align: center;
+  margin: 0 0 1.5rem;
+  font-family: "Inter Tight", Inter, sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
 }
 
 .search-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .search-loading,
 .search-error,
 .search-empty {
-  text-align: center;
-  padding: 3rem;
-  font-size: 1.2rem;
-  color: #666;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 8rem 1.5rem 4rem;
+  color: var(--fashion-muted);
 }
 
 .search-error {
-  color: #e74c3c;
+  color: #b42318;
 }
-
-.search-empty {
-  color: #666;
-  font-style: italic;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .search-results {
-    padding: 1rem;
-  }
-
-  .search-results h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .search-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-results h2 {
-    font-size: 1.3rem;
-  }
-
-  .search-grid {
-    grid-template-columns: 1fr;
-  }
-} 

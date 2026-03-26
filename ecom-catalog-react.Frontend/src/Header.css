@@ -1,16 +1,24 @@
+:root {
+  --header-text: var(--primary-black, #1a1a1a);
+  --header-muted: var(--soft-gray, #666666);
+  --header-bg: var(--primary-accent, #ffffff);
+  --header-border: var(--border-gray, #e8e8e8);
+}
+
 .main-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: #fff;
+  background: var(--header-bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
   height: 70px;
+  font-family: var(--font-primary, 'Inter', sans-serif);
 }
 
 .nav-left {
@@ -29,7 +37,7 @@
 
 .nav-left li {
   font-size: 1.1rem;
-  color: #444;
+  color: var(--header-text);
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s;
@@ -37,17 +45,17 @@
 }
 
 .nav-left li:hover {
-  color: #e26d4a;
+  color: var(--header-muted);
 }
 
 .nav-left li.active {
-  color: #e26d4a;
+  color: var(--header-text);
   font-weight: 700;
 }
 
 /* Estilos específicos para el enlace de inicio */
 .nav-left li .nav-link {
-  color: hsl(17, 7%, 21%);
+  color: var(--header-text);
   font-weight: 500;
   text-decoration: none;
   padding: 0.5rem 0;
@@ -56,16 +64,16 @@
 }
 
 .nav-left li .nav-link:hover {
-  color: #e26d4a;
+  color: var(--header-muted);
 }
 
 /* Estilo específico para el botón de inicio */
 .nav-left li .nav-link.home-link {
-  color: #e26d4a;
+  color: var(--header-text);
 }
 
 .nav-left li .nav-link.home-link:hover {
-  color: #e26d4a;
+  color: var(--header-muted);
 }
 
 .logo-center {
@@ -84,9 +92,9 @@
 
 .logo-text {
   font-size: 1.7rem;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: 2px;
-  color: #222;
+  color: var(--header-text);
   text-decoration: none;
   border: none;
   display: inline-block;
@@ -122,7 +130,7 @@
   border: none;
   padding: 8px;
   cursor: pointer;
-  color: #333;
+  color: var(--header-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,7 +139,7 @@
 }
 
 .icon-btn:hover {
-  color: #666;
+  color: var(--header-muted);
 }
 
 /* Estilo específico para el botón de favoritos */
@@ -146,11 +154,11 @@
 /* Cuando el corazón está en la página de favoritos */
 .nav-right a[href="/favoritos"] svg {
   fill: none;
-  stroke: #333;
+  stroke: var(--header-text);
 }
 
 .nav-right a[href="/favoritos"]:hover svg {
-  stroke: #666;
+  stroke: var(--header-muted);
 }
 
 /* Estilos para el contador del carrito */
@@ -195,12 +203,12 @@
   border: none;
   padding: 0.5rem;
   cursor: pointer;
-  color: #444;
+  color: var(--header-text);
   transition: color 0.2s;
 }
 
 .menu-toggle:hover {
-  color: #e26d4a;
+  color: var(--header-muted);
 }
 
 @media (max-width: 900px) {
@@ -219,7 +227,7 @@
     top: 60px;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: var(--header-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     transform: translateY(-100%);
     opacity: 0;
@@ -327,7 +335,7 @@
 .dropdown-item {
   display: block;
   padding: 0.2rem 0.6rem;
-  color: #333;
+  color: var(--header-text);
   text-decoration: none;
   transition: all 0.2s ease;
   position: relative;
@@ -338,7 +346,7 @@
 /* Efecto hover para los items del menú */
 .dropdown-item:hover {
   background-color: #f8f9fa;
-  color: #000;
+  color: var(--header-text);
   padding-left: 0.8rem;
 }
 
@@ -350,7 +358,7 @@
   top: 0;
   height: 100%;
   width: 3px;
-  background-color: #000;
+  background-color: var(--header-text);
   transform: scaleY(0);
   transition: transform 0.2s ease;
 }

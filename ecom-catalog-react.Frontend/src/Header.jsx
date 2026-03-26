@@ -10,6 +10,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from './contexts/CartContext';
 import './Header.css';
+import './styles/minimalista.css';
 import SearchPreviewPortal from './components/SearchPreviewPortal';
 import config from './config';
 import { useAuth } from './contexts/AuthContext';

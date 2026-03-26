@@ -1,96 +1,98 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './contexts/CartContext';
 import './Cart.css';
 
 const Cart = () => {
   const { cart = [], updateQuantity, removeFromCart, clearCart } = useCart();
-
-  // Calcular el total
   const total = cart.reduce((sum, item) => sum + (item.precio * item.quantity), 0);
 
-  return (
-    <div className="cart-container">
-      <h2>Carrito de Compras</h2>
-      {cart.length === 0 ? (
-        <div className="empty-cart">
-          <div className="empty-cart-icon" style={{ marginBottom: '1.5rem' }}>
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#e26d4a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="9" cy="21" r="1" />
-              <circle cx="20" cy="21" r="1" />
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-            </svg>
-          </div>
-          <p style={{ fontWeight: 500, fontSize: '1.25rem', color: '#444' }}>Tu carrito está vacío</p>
-          <Link to="/" className="continue-shopping" style={{ background: '#e26d4a', fontWeight: 600, fontSize: '1.1rem', marginTop: '1.2rem' }}>
-            Continuar Comprando
+  if (cart.length === 0) {
+    return (
+      <section className="cart-page cart-page-empty">
+        <div className="cart-shell">
+          <p className="cart-eyebrow">Carrito</p>
+          <h1>Tu seleccion esta vacia.</h1>
+          <p className="cart-empty-copy">
+            Cuando anadas prendas al carrito, apareceran aqui con un resumen claro y listo para continuar.
+          </p>
+          <Link to="/colecciones" className="cart-primary-link">
+            Seguir explorando
           </Link>
         </div>
-      ) : (
-        <>
-          <div className="cart-items">
-            {cart.map(item => (
-              <div key={item.id} className="cart-item">
-                <img src={item.imagenUrl} alt={item.nombre} className="item-image" />
-                <div className="item-details">
+      </section>
+    );
+  }
+
+  return (
+    <section className="cart-page">
+      <div className="cart-shell">
+        <div className="cart-heading">
+          <div>
+            <p className="cart-eyebrow">Carrito</p>
+            <h1>Revisa tu pedido.</h1>
+          </div>
+          <button type="button" className="cart-clear-link" onClick={clearCart}>
+            Vaciar carrito
+          </button>
+        </div>
+
+        <div className="cart-layout">
+          <div className="cart-items-list">
+            {cart.map((item) => (
+              <article key={item.id} className="cart-item-card">
+                <img src={item.imagenUrl} alt={item.nombre} className="cart-item-image" />
+
+                <div className="cart-item-copy">
+                  <p className="cart-item-kicker">{item.categoria?.nombre || 'Coleccion'}</p>
                   <h3>{item.nombre}</h3>
-                  <p className="item-price">{item.precio}€</p>
+                  <p className="cart-item-price">{item.precio.toFixed(2)} EUR</p>
                 </div>
-                <div className="quantity-controls">
-                  <button 
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="quantity-btn"
-                  >
-                    -
-                  </button>
-                  <span className="quantity">{item.quantity}</span>
-                  <button 
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="quantity-btn"
-                  >
-                    +
+
+                <div className="cart-item-actions">
+                  <div className="cart-quantity-controls">
+                    <button type="button" className="cart-quantity-button" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                      -
+                    </button>
+                    <span className="cart-quantity-value">{item.quantity}</span>
+                    <button type="button" className="cart-quantity-button" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                      +
+                    </button>
+                  </div>
+
+                  <button type="button" className="cart-remove-link" onClick={() => removeFromCart(item.id)}>
+                    Eliminar
                   </button>
                 </div>
-                <button 
-                  onClick={() => removeFromCart(item.id)}
-                  className="remove-btn"
-                  title="Eliminar producto"
-                >
-                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-                    <line x1="10" y1="11" x2="10" y2="17" />
-                    <line x1="14" y1="11" x2="14" y2="17" />
-                  </svg>
-                </button>
-              </div>
+              </article>
             ))}
           </div>
 
-          <div className="cart-summary">
-            <div className="summary-row">
-              <span>Subtotal:</span>
-              <span>{total.toFixed(2)}€</span>
+          <aside className="cart-summary-card">
+            <p className="cart-summary-kicker">Resumen</p>
+            <div className="cart-summary-row">
+              <span>Subtotal</span>
+              <strong>{total.toFixed(2)} EUR</strong>
             </div>
-            <div className="summary-row">
-              <span>Envío:</span>
-              <span>Gratis</span>
+            <div className="cart-summary-row">
+              <span>Envio</span>
+              <strong>Gratis</strong>
             </div>
-            <div className="summary-row total" style={{ color: '#e26d4a', fontSize: '1.3rem' }}>
-              <span>Total:</span>
-              <span>{total.toFixed(2)}€</span>
+            <div className="cart-summary-row cart-summary-total">
+              <span>Total</span>
+              <strong>{total.toFixed(2)} EUR</strong>
             </div>
-            <button className="checkout-btn" style={{ boxShadow: '0 2px 8px rgba(226,109,74,0.12)', fontWeight: 700 }}>
-              Proceder al Pago
+            <button type="button" className="cart-primary-button">
+              Continuar al pago
             </button>
-            <button onClick={clearCart} className="clear-cart-btn">
-              Vaciar Carrito
-            </button>
-          </div>
-        </>
-      )}
-    </div>
+            <Link to="/colecciones" className="cart-secondary-link">
+              Seguir comprando
+            </Link>
+          </aside>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Cart; 
+export default Cart;

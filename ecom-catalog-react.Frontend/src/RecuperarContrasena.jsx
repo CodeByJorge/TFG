@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './RecuperarContrasena.css';
+import './AuthPages.css';
+
+const heroStyle = {
+  backgroundImage: "linear-gradient(180deg, rgba(24,24,24,0.18), rgba(24,24,24,0.62)), url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80')",
+};
 
 const RecuperarContrasena = () => {
   const [email, setEmail] = useState('');
@@ -9,47 +13,68 @@ const RecuperarContrasena = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email) {
-      setError('Por favor, ingresa tu correo electrónico');
+    if (!email.trim()) {
+      setError('Introduce tu correo electronico para continuar.');
       return;
     }
-    // TODO: Implementar lógica de recuperación de contraseña
     setSubmitted(true);
     setError('');
   };
 
   return (
-    <div className="recuperar-contrasena-container">
-      <div className="recuperar-contrasena-box">
-        <h2>Recuperar Contraseña</h2>
-        {submitted ? (
-          <div className="success-message">
-            <p>Se ha enviado un enlace de recuperación a tu correo electrónico.</p>
-            <Link to="/login" className="back-to-login">Volver al inicio de sesión</Link>
+    <section className="auth-page">
+      <div className="auth-layout">
+        <aside className="auth-aside" style={heroStyle}>
+          <div className="auth-aside-copy">
+            <p className="auth-kicker">Recuperacion</p>
+            <h1>Recupera el acceso a tu cuenta.</h1>
+            <p>
+              Te enviaremos un enlace para volver a entrar y seguir con tu seleccion guardada.
+            </p>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="recuperar-contrasena-form">
-            <div className="form-group">
-              <label htmlFor="email">Correo Electrónico</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="ejemplo@correo.com"
-                required
-              />
+        </aside>
+
+        <div className="auth-panel">
+          <p className="auth-kicker">Soporte</p>
+          <h2>Recuperar contrasena</h2>
+          <p className="auth-panel-intro">
+            Introduce tu email y prepararemos el siguiente paso para que puedas restablecer el acceso.
+          </p>
+
+          {submitted ? (
+            <div className="auth-success">
+              <p className="auth-panel-intro">
+                Hemos preparado el envio del enlace de recuperacion a <strong>{email}</strong>.
+              </p>
+              <Link to="/login" className="auth-primary">Volver al login</Link>
             </div>
-            {error && <div className="error-message">{error}</div>}
-            <button type="submit" className="submit-btn">Enviar enlace de recuperación</button>
-            <div className="back-to-login">
-              <Link to="/login">Volver al inicio de sesión</Link>
-            </div>
-          </form>
-        )}
+          ) : (
+            <form onSubmit={handleSubmit} className="auth-form">
+              <div className="auth-field">
+                <label htmlFor="email">Correo electronico</label>
+                <input
+                  className="auth-input"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="ejemplo@correo.com"
+                  required
+                />
+              </div>
+
+              {error && <div className="auth-alert">{error}</div>}
+
+              <div className="auth-actions">
+                <button type="submit" className="auth-primary">Enviar enlace</button>
+                <Link to="/login" className="auth-inline-link">Volver al login</Link>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default RecuperarContrasena; 
+export default RecuperarContrasena;
