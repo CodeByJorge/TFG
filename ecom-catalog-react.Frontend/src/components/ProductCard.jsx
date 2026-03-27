@@ -1,21 +1,24 @@
-/**
- * Componente ProductCard
- * 
- * Este componente representa una tarjeta de producto individual
- * que muestra la imagen, nombre, precio y botón de compra.
- * 
- * @component
- */
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { useCart } from '../contexts/CartContext';
-import { useNavigate, useLocation } from 'react-router-dom';
 import './ProductCard.css';
 
-const ProductCard = ({ 
-  product, 
-  showFavoriteButton = true 
+const formatSizes = (sizes) => {
+  if (!Array.isArray(sizes) || sizes.length === 0) {
+    return [];
+  }
+
+  return sizes
+    .map((size) => (typeof size === 'string' ? size : size?.nombre))
+    .filter(Boolean)
+    .slice(0, 4);
+};
+
+const ProductCard = ({
+  product,
+  showFavoriteButton = true,
 }) => {
   const { user, isLoggedIn } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
@@ -28,6 +31,8 @@ const ProductCard = ({
   const favoriteButtonRef = useRef(null);
 
   const isFavoritesPage = location.pathname === '/favoritos';
+  const isFavorite = favorites.includes(product.id);
+  const sizes = formatSizes(product.tallas);
 
   const handleFavoriteClick = async (e) => {
     e.preventDefault();
@@ -35,6 +40,7 @@ const ProductCard = ({
       navigate('/login');
       return;
     }
+
     setIsLoading(true);
     try {
       await toggleFavorite(product.id, favoriteButtonRef.current);
@@ -48,105 +54,115 @@ const ProductCard = ({
   const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    console.log('Intentando añadir al carrito:', product);
-    
+
     if (!isLoggedIn || !user?.token) {
-      console.log('Usuario no logueado, redirigiendo a login');
       navigate('/login');
       return;
     }
 
     try {
       setIsAddingToCart(true);
-      console.log('Llamando a addToCart con:', product);
       addToCart(product);
-      console.log('Producto añadido al carrito');
-      
-      // Mostrar notificación
       setShowNotification(true);
       setTimeout(() => {
         setShowNotification(false);
       }, 2000);
     } catch (error) {
-      console.error('Error al añadir al carrito:', error);
+      console.error('Error al anadir al carrito:', error);
     } finally {
       setIsAddingToCart(false);
     }
   };
 
-  const isFavorite = favorites.includes(product.id);
-
   return (
-    <div className="card product-card">
+    <article className="card product-card">
       <div className="image-container">
-        <img 
-          src={product.imagenUrl} 
-          alt={product.nombre} 
-          className="card-img-top product-image" 
+        <img
+          src={product.imagenUrl}
+          alt={product.nombre}
+          className="card-img-top product-image"
         />
+        <div className="product-card-gradient" />
+
         {showFavoriteButton && (
-          <button 
+          <button
             ref={favoriteButtonRef}
             className={`favorite-btn ${isFavorite ? 'active' : ''}`}
             onClick={handleFavoriteClick}
             disabled={isLoading}
+            aria-label="Guardar en favoritos"
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 24 24" 
-              fill={isFavorite ? "currentColor" : "none"} 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill={isFavorite ? 'currentColor' : 'none'}
               stroke="currentColor"
               strokeWidth="2"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
           </button>
         )}
+
         {isFavoritesPage && (
-          <button 
+          <button
             className="cart-btn"
             onClick={handleAddToCart}
             disabled={isAddingToCart}
             title="Agregar al carrito"
+            aria-label="Agregar al carrito"
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 24 24" 
-              fill="none" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
               stroke="currentColor"
               strokeWidth="2"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
           </button>
         )}
+
         {showNotification && (
           <div className="cart-notification">
-            Producto añadido al carrito
+            Producto anadido al carrito
           </div>
         )}
       </div>
+
       <div className="card-body product-info">
-        <h6 className="card-title product-title">{product.nombre}</h6>
-        <p className="card-text">{product.descripcion}</p>
-        <strong>{product.precio} €</strong>
-        <div className="tallas-lista">
-          {product.tallas && Array.isArray(product.tallas) && product.tallas.length > 0 && product.tallas.some(t => t && t.nombre)
-            ? product.tallas.map(t => t.nombre).join(' · ')
-            : 'Sin tallas'}
+        <div className="product-copy">
+          <span className="product-kicker">Seleccion</span>
+          <h6 className="card-title product-title">{product.nombre}</h6>
+          <p className="card-text">{product.descripcion}</p>
+        </div>
+
+        <div className="product-footer">
+          <strong className="product-price">{product.precio} EUR</strong>
+          <div className="tallas-lista">
+            {sizes.length > 0 ? (
+              sizes.map((size) => (
+                <span key={size} className="size-pill">
+                  {size}
+                </span>
+              ))
+            ) : (
+              <span className="size-pill size-pill--muted">Sin tallas</span>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
-export default ProductCard; 
+export default ProductCard;

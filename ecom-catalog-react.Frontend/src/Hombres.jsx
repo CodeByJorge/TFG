@@ -1,116 +1,24 @@
-﻿import config from './config';
-import React, { useState, useEffect } from 'react';
-import ProductCard from './components/ProductCard';
-import { useAuth } from './contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import GenreLandingPage from './components/GenreLandingPage';
 import './Hombres.css';
 
-const Hombres = () => {
-  const { user, isLoggedIn } = useAuth();
-  const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  const [favoritos, setFavoritos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [showAll, setShowAll] = useState(false);
+const Hombres = () => (
+  <GenreLandingPage
+    genreName="Hombres"
+    section="hombre"
+    eyebrow="Hombre · Seleccion principal"
+    title="Coleccion hombre"
+    subtitle="Una entrada mas limpia para descubrir las piezas clave de la temporada sin perder tiempo en ruido visual."
+    description="Desde basicos estructurados hasta capas exteriores y zapatos, esta entrada resume la coleccion masculina con una navegacion mas serena y premium."
+    heroClassName="genre-hero-hombre"
+    seeAllPath="/todos-productos-hombre"
+    categories={[
+      { name: 'Camisetas', path: '/hombres/camisetas', copy: 'Basicos depurados para looks diarios.' },
+      { name: 'Pantalones', path: '/hombres/pantalones', copy: 'Cortes limpios y materiales equilibrados.' },
+      { name: 'Chaquetas', path: '/hombres/chaquetas', copy: 'Capas exteriores con presencia sobria.' },
+      { name: 'Zapatos', path: '/hombres/zapatos', copy: 'Pares esenciales para completar el look.' },
+    ]}
+  />
+);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(config.productGenreNameUrl('Hombres'));
-        if (!response.ok) {
-          throw new Error('Error al cargar los productos');
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    const fetchFavoritos = async () => {
-      if (!isLoggedIn || !user?.token) return;
-
-      try {
-        const response = await axios.get(config.FAVORITES_URL, {
-          headers: {
-            'Authorization': `Bearer ${user.token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        setFavoritos(response.data.map(fav => fav.producto.id));
-      } catch (error) {
-        console.error('Error al cargar favoritos:', error);
-      }
-    };
-
-    fetchFavoritos();
-  }, [isLoggedIn, user]);
-
-  const handleFavoriteToggle = (productId) => {
-    setFavoritos(prevFavoritos => {
-      if (prevFavoritos.includes(productId)) {
-        return prevFavoritos.filter(id => id !== productId);
-      } else {
-        return [...prevFavoritos, productId];
-      }
-    });
-  };
-
-  const handleVerTodo = () => {
-    navigate('/todos-productos-hombre');
-  };
-
-  const productsToShow = showAll ? products : products.slice(0, 4);
-
-  return (
-    <>
-      <div className="hombres-container">
-        <div className="hombres-content">
-          <h1>ColecciÃ³n Hombres</h1>
-          <p>Descubre nuestra nueva colecciÃ³n para hombres</p>
-        </div>
-      </div>
-
-      <div className="hombres-section">
-        {loading ? (
-          <div className="loading">Cargando productos...</div>
-        ) : error ? (
-          <div className="error">{error}</div>
-        ) : (
-          <>
-            <div className="products-header">
-              <button 
-                className="ver-todo-btn" 
-                onClick={handleVerTodo}
-              >
-                Ver todo
-              </button>
-            </div>
-            <div className="hombres-grid">
-              {productsToShow.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  isFavorite={favoritos.includes(product.id)}
-                  onFavoriteToggle={handleFavoriteToggle}
-                  showFavoriteButton={true}
-                />
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </>
-  );
-};
-
-export default Hombres; 
-
+export default Hombres;

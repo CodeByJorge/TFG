@@ -1,170 +1,128 @@
-/*
-  Estilos principales para la sección de Preguntas Frecuentes (FAQ)
-  Incluye grid de tarjetas de categorías y acordeón de preguntas
-*/
-
-.faq-accordion-container {
-  max-width: 700px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(226, 109, 74, 0.08);
-  padding: 32px 24px;
-  color: #271e1b;
+﻿.faq-page .support-hero {
+  margin-bottom: 1.25rem;
 }
 
-.faq-accordion-container h2 {
-  color: #ce582d;
-  text-align: center;
-  margin-bottom: 2rem;
+.faq-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.faq-card {
+  border: 1px solid rgba(24, 24, 24, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--fashion-shadow);
+  cursor: pointer;
+  display: grid;
+  gap: 1rem;
+  text-align: left;
+  padding: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(24, 24, 24, 0.1);
+}
+
+.faq-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(24, 24, 24, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fashion-text);
+}
+
+.faq-card-info {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.faq-card-title {
+  font-family: "Inter Tight", Inter, sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.faq-card-count {
+  color: var(--fashion-muted);
+  font-size: 0.92rem;
+}
+
+.faq-category-shell {
+  padding: 1.5rem;
+}
+
+.faq-back-btn {
+  margin-bottom: 1rem;
+}
+
+.faq-accordion-list {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
 }
 
 .faq-item {
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(226,109,74,0.07);
-  margin-bottom: 1rem;
-  transition: box-shadow 0.3s;
+  border: 1px solid rgba(24, 24, 24, 0.08);
+  border-radius: 22px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
 }
-.faq-item.open {
-  box-shadow: 0 4px 16px rgba(226,109,74,0.15);
-}
+
 .faq-question {
-  cursor: pointer;
-  padding: 1rem;
-  font-weight: bold;
-  color: #ce582d;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 1rem 1.1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.2s;
-  user-select: none;
+  gap: 1rem;
+  text-align: left;
+  color: var(--fashion-text);
 }
-.faq-question:hover {
-  background: #fbeee6;
-}
+
 .arrow {
-  transition: transform 0.3s;
-  display: inline-block;
-}
-.arrow.rotated {
-  transform: rotate(180deg);
-}
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  color: #44403e;
-  background: #fff7f2;
-  padding: 0 1rem;
-  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
-}
-.faq-item.open .faq-answer {
-  max-height: 200px;
-  padding: 1rem;
-}
-
-/* Contenedor principal de la vista de tarjetas */
-.faq-cards-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 32px 24px;
-}
-
-/* Grid de tarjetas de categorías: 3 columnas, 2 filas */
-.faq-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 32px;
-}
-
-/* Título principal de la sección FAQ */
-.faq-cards-title {
-  color: #111;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-
-/* Tarjeta de categoría */
-.faq-card {
-  background: #4b2e23;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(226,109,74,0.07);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(24, 24, 24, 0.06);
+  display: inline-flex;
   align-items: center;
-  transition: box-shadow 0.3s, transform 0.2s;
-  min-height: 220px;
-  border: 1.5px solid #ece6e6;
-}
-.faq-card:hover {
-  box-shadow: 0 6px 24px rgba(226,109,74,0.15);
-  transform: translateY(-4px) scale(1.03);
+  justify-content: center;
+  transition: transform 0.2s ease;
 }
 
-/* Ícono grande en la parte superior de la tarjeta */
-.faq-card-icon {
-  color: #fff;
-  font-size: 3.5rem;
-  margin: 32px 0 16px 0;
+.arrow.rotated {
+  transform: rotate(45deg);
 }
 
-/* Parte inferior blanca de la tarjeta */
-.faq-card-info {
-  background: #fff;
-  width: 100%;
-  border-radius: 0 0 16px 16px;
-  padding: 18px 0 10px 0;
-  text-align: center;
-}
-.faq-card-title {
-  color: #1d1a19;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 0.2rem;
-}
-/* Cantidad de artículos/preguntas */
-.faq-card-count {
-  color: #6d5c54;
-  font-size: 0.95rem;
+.faq-answer {
+  padding: 0 1.1rem 1rem;
+  color: var(--fashion-muted);
 }
 
-/* Botón para volver a la vista de categorías */
-.faq-back-btn {
-  background: #4b2e23;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.faq-back-btn:hover {
-  background: #ce582d;
+.faq-answer p {
+  margin: 0;
 }
 
-/* Responsividad para tablet: 2 columnas, 3 filas */
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .faq-cards-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Responsividad para móvil: 1 columna */
-@media (max-width: 600px) {
+@media (max-width: 680px) {
   .faq-cards-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
   }
-  .faq-cards-title {
-    font-size: 1.3rem;
+
+  .faq-category-shell {
+    padding: 1.2rem;
   }
-} 
+}

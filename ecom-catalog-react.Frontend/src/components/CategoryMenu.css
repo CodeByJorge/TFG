@@ -1,83 +1,58 @@
-.category-menu {
-  background-color: transparent;
-  padding: 0;
-  box-shadow: none;
-  margin-bottom: 0;
-  margin-top: 0;
+@import '../styles/minimalista.css';
+
+.fashion-category-menu {
+  min-width: 0;
 }
 
-.category-menu ul {
+.fashion-category-menu ul {
+  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-start;
-  gap: 2rem;
-  list-style: none;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 }
 
-.category-menu li {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
+.fashion-category-menu li {
+  min-width: 0;
 }
 
-.category-menu li a {
+.fashion-category-menu a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--fashion-text);
   text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  display: inline-block;
-  padding: 0.5rem 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.category-menu li:hover a {
-  color: #007bff;
+.fashion-category-menu a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(26, 26, 26, 0.2);
+  box-shadow: 0 10px 22px rgba(24, 24, 24, 0.08);
 }
 
-.category-menu li.active {
-  color: #e26d4a;
-  font-weight: 600;
+.fashion-category-menu li.is-active a {
+  background: var(--fashion-text);
+  color: #f8f5ef;
+  border-color: var(--fashion-text);
 }
 
-.category-menu li.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #e26d4a;
-  transform: scaleX(1);
-  transition: transform 0.2s ease;
-}
-
-.category-menu li:not(.active)::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #e26d4a;
-  transform: scaleX(0);
-  transition: transform 0.2s ease;
-}
-
-.category-menu li:hover::after {
-  transform: scaleX(1);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .category-menu ul {
-    flex-wrap: wrap;
-    gap: 1rem;
+@media (max-width: 760px) {
+  .fashion-category-menu ul {
     justify-content: center;
   }
 
-  .category-menu li {
-    font-size: 0.9rem;
+  .fashion-category-menu a {
+    width: 100%;
   }
-} 
+}

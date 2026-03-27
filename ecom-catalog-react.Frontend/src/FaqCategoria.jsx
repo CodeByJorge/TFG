@@ -1,28 +1,27 @@
-/**
- * Vista de preguntas frecuentes para una sola categoría
- * Muestra el acordeón de preguntas de la categoría seleccionada
- * Incluye botón para volver a la vista de categorías
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categorias } from './FaqAccordion';
+import './SupportPages.css';
 import './FaqAccordion.css';
 
 const FaqCategoria = () => {
-  // Obtiene el slug de la categoría desde la URL
   const { slug } = useParams();
   const navigate = useNavigate();
-  // Busca la categoría correspondiente
-  const categoria = categorias.find(cat => cat.slug === slug);
-  // Estado para controlar qué pregunta está abierta
+  const categoria = categorias.find((cat) => cat.slug === slug);
   const [open, setOpen] = useState({});
 
-  // Si la categoría no existe, muestra mensaje de error
   if (!categoria) {
-    return <div className="faq-accordion-container"><h2>Categoría no encontrada</h2></div>;
+    return (
+      <section className="support-page faq-page">
+        <div className="support-shell">
+          <div className="support-card faq-category-shell">
+            <h2>Categora no encontrada</h2>
+          </div>
+        </div>
+      </section>
+    );
   }
 
-  // Alterna la apertura/cierre de una pregunta
   const handleToggle = (qIdx) => {
     setOpen((prev) => ({
       ...prev,
@@ -31,25 +30,33 @@ const FaqCategoria = () => {
   };
 
   return (
-    <div className="faq-accordion-container">
-      {/* Botón para volver a la vista de categorías */}
-      <button className="faq-back-btn" onClick={() => navigate('/faq')}>← Volver a categorías</button>
-      {/* Título de la categoría con ícono */}
-      <h2 className="faq-category-title">{categoria.icono} {categoria.nombre}</h2>
-      {/* Acordeón de preguntas */}
-      {categoria.preguntas.map((item, qIdx) => (
-        <div key={qIdx} className={`faq-item ${open[qIdx] ? 'open' : ''}`}>
-          <div className="faq-question" onClick={() => handleToggle(qIdx)}>
-            <span>{item.pregunta}</span>
-            <span className={`arrow ${open[qIdx] ? 'rotated' : ''}`}>▼</span>
-          </div>
-          <div className="faq-answer">
-            {open[qIdx] && <p>{item.respuesta}</p>}
+    <section className="support-page faq-page">
+      <div className="support-shell">
+        <div className="support-card faq-category-shell">
+          <button className="support-link-button faq-back-btn" type="button" onClick={() => navigate('/faq')}>
+            Volver a categorias
+          </button>
+          <p className="support-kicker">FAQ</p>
+          <h1 className="support-title faq-category-title">{categoria.nombre}</h1>
+          <p className="support-subtitle">Selecciona una pregunta para ver la respuesta desplegada sin perder contexto.</p>
+
+          <div className="faq-accordion-list">
+            {categoria.preguntas.map((item, qIdx) => (
+              <div key={qIdx} className={`faq-item ${open[qIdx] ? 'open' : ''}`}>
+                <button className="faq-question" type="button" onClick={() => handleToggle(qIdx)}>
+                  <span>{item.pregunta}</span>
+                  <span className={`arrow ${open[qIdx] ? 'rotated' : ''}`}>+</span>
+                </button>
+                <div className="faq-answer">
+                  {open[qIdx] && <p>{item.respuesta}</p>}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default FaqCategoria; 
+export default FaqCategoria;

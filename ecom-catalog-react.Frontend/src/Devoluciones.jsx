@@ -1,64 +1,89 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React, { useState } from 'react';
+import './SupportPages.css';
 import './Devoluciones.css';
 
 const Devoluciones = () => {
   const [pedido, setPedido] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!pedido || !email) {
-      setError('Por favor, completa ambos campos.');
+      setError('Completa los dos campos para continuar.');
+      setSuccess('');
       return;
     }
     setError('');
-    // Aquí iría la lógica para buscar el pedido
-    alert('Funcionalidad de búsqueda de pedido no implementada.');
+    setSuccess(`Solicitud preparada para el pedido ${pedido}.`);
   };
 
   return (
-    <div className="devoluciones-bg">
-      <div className="devoluciones-form-container">
-        <Link to="/" className="logo-link">
-          <span className="logo-text">FASHION</span>
-        </Link>
-        <h2 className="devoluciones-title">CAMBIOS Y DEVOLUCIONES</h2>
-        <p className="devoluciones-desc">
-          Introduce los datos de tu pedido original para iniciar el proceso
-        </p>
-        <form className="devoluciones-form" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <span className="input-icon">📦</span>
-            <input
-              type="text"
-              placeholder="Número de pedido"
-              value={pedido}
-              onChange={e => setPedido(e.target.value)}
-              className="devoluciones-input"
-            />
+    <section className="support-page devoluciones-page">
+      <div className="support-shell">
+        <div className="support-hero devoluciones-hero">
+          <p className="support-kicker">Cambios y devoluciones</p>
+          <h1 className="support-title">Gestiona tu devolucion sin friccion.</h1>
+          <p className="support-subtitle">
+            Inicia el proceso con los datos de tu pedido original y consulta en un vistazo las condiciones principales.
+          </p>
+        </div>
+
+        <div className="support-grid devoluciones-grid">
+          <div className="support-card">
+            <h2>Buscar pedido</h2>
+            <p className="support-note">Necesitamos tu numero de pedido y el correo asociado a la compra.</p>
+
+            <form className="support-form" onSubmit={handleSubmit}>
+              <div className="support-field">
+                <label htmlFor="pedido">Numero de pedido</label>
+                <input className="support-input" type="text" id="pedido" placeholder="Ej. FM-2026-0142" value={pedido} onChange={(e) => setPedido(e.target.value)} />
+              </div>
+              <div className="support-field">
+                <label htmlFor="email">Email</label>
+                <input className="support-input" type="email" id="email" placeholder="ejemplo@correo.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+
+              {error && <div className="support-alert">{error}</div>}
+              {success && <div className="support-success">{success}</div>}
+
+              <div className="support-actions">
+                <button type="submit" className="support-button">Continuar</button>
+              </div>
+            </form>
           </div>
-          <div className="input-group">
-            <span className="input-icon">@</span>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="devoluciones-input"
-            />
-          </div>
-          {error && <div className="devoluciones-error">{error}</div>}
-          <div className="devoluciones-legal">
-            Al continuar, confirmas que aceptas los <a href="#">Términos y Condiciones</a>, <a href="#">Política de privacidad</a> y la <a href="#">Política de cookies</a>.
-          </div>
-          <button type="submit" className="devoluciones-btn">Buscar pedido</button>
-        </form>
-        <div className="devoluciones-powered">Atención al cliente Fashion</div>
+
+          <aside className="support-card devoluciones-aside">
+            <h3>Condiciones</h3>
+            <div className="support-list">
+              <div className="support-list-item">
+                <div className="support-list-icon">14d</div>
+                <div>
+                  <strong>Plazo</strong>
+                  <p>Puedes solicitar cambios o devoluciones dentro de los 14 dias posteriores a la entrega.</p>
+                </div>
+              </div>
+              <div className="support-list-item">
+                <div className="support-list-icon">OK</div>
+                <div>
+                  <strong>Estado</strong>
+                  <p>La prenda debe conservar etiqueta, embalaje y no presentar uso.</p>
+                </div>
+              </div>
+              <div className="support-list-item">
+                <div className="support-list-icon">INFO</div>
+                <div>
+                  <strong>Ayuda</strong>
+                  <p>Si tu pedido presenta una incidencia, contacta antes con soporte para agilizar el proceso.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Devoluciones; 
+export default Devoluciones;

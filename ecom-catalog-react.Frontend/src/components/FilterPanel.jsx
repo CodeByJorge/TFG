@@ -1,171 +1,199 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FilterPanel.css';
 
-const FilterPanel = ({ onFilterChange, onClose }) => {
-  const [filters, setFilters] = useState({
-    priceRange: { min: 0, max: 250 },
-    sortBy: 'priceAsc',
-    size: '',
-    color: ''
-  });
+const DEFAULT_FILTERS = {
+  priceRange: { min: 0, max: 250 },
+  sortBy: 'featured',
+  size: '',
+  color: '',
+};
 
-  const handlePriceChange = (type, value) => {
-    const newFilters = {
-      ...filters,
+const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+const colors = [
+  { label: 'Negro', value: 'negro', hex: '#171717' },
+  { label: 'Blanco', value: 'blanco', hex: '#f6f3ee' },
+  { label: 'Azul', value: 'azul', hex: '#5f7592' },
+  { label: 'Beige', value: 'beige', hex: '#d8c7af' },
+  { label: 'Marron', value: 'marron', hex: '#8b6b53' },
+  { label: 'Verde', value: 'verde', hex: '#667860' },
+];
+
+const sortOptions = [
+  { value: 'featured', label: 'Destacados' },
+  { value: 'priceAsc', label: 'Precio ascendente' },
+  { value: 'priceDesc', label: 'Precio descendente' },
+  { value: 'nameAsc', label: 'Nombre A-Z' },
+];
+
+const FilterPanel = ({
+  filters = DEFAULT_FILTERS,
+  onFilterChange,
+  onClose,
+  onClear = () => {},
+  productCount = 0,
+  title = 'Catalogo',
+}) => {
+  const [draftFilters, setDraftFilters] = useState(filters);
+
+  useEffect(() => {
+    setDraftFilters(filters);
+  }, [filters]);
+
+  const updateDraft = (partial) => {
+    setDraftFilters((current) => ({ ...current, ...partial }));
+  };
+
+  const handlePriceChange = (field, value) => {
+    const numericValue = Number(value);
+    setDraftFilters((current) => ({
+      ...current,
       priceRange: {
-        ...filters.priceRange,
-        [type]: Number(value)
-      }
-    };
-    setFilters(newFilters);
+        ...current.priceRange,
+        [field]: numericValue,
+      },
+    }));
   };
 
-  const handleSortChange = (sortBy) => {
-    const newFilters = {
-      ...filters,
-      sortBy
-    };
-    setFilters(newFilters);
-  };
-
-  const handleSizeChange = (size) => {
-    const newFilters = {
-      ...filters,
-      size
-    };
-    setFilters(newFilters);
-  };
-
-  const handleColorChange = (color) => {
-    const newFilters = {
-      ...filters,
-      color
-    };
-    setFilters(newFilters);
-  };
-
-  const handleApplyFilters = () => {
-    onFilterChange(filters);
+  const handleApply = () => {
+    onFilterChange(draftFilters);
   };
 
   return (
-    <div className="filter-panel">
-      <div className="filter-header">
-        <h3>Filtros</h3>
-        <button className="close-button" onClick={onClose}>×</button>
+    <div className="filter-panel fashion-filter-panel">
+      <div className="fashion-filter-header">
+        <div>
+          <span className="fashion-filter-eyebrow">Editar seleccion</span>
+          <h3>{title}</h3>
+          <p>{productCount} resultados con la configuracion actual.</p>
+        </div>
+        <button type="button" className="fashion-filter-close" onClick={onClose} aria-label="Cerrar filtros">
+          x
+        </button>
       </div>
-      
-      {/* Ordenar por precio */}
-      <div className="filter-section">
-        <h4>Ordenar por precio</h4>
-        <div className="sort-options">
-          <button
-            className={filters.sortBy === 'priceAsc' ? 'active' : ''}
-            onClick={() => handleSortChange('priceAsc')}
-          >
-            PRECIO ASCENDENTE
-          </button>
-          <button
-            className={filters.sortBy === 'priceDesc' ? 'active' : ''}
-            onClick={() => handleSortChange('priceDesc')}
-          >
-            PRECIO DESCENDENTE
-          </button>
+
+      <div className="fashion-filter-section">
+        <div className="fashion-filter-section-head">
+          <h4>Orden</h4>
+          <span>Como quieres explorar la coleccion</span>
+        </div>
+        <div className="fashion-chip-grid">
+          {sortOptions.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              className={`fashion-chip ${draftFilters.sortBy === option.value ? 'is-active' : ''}`}
+              onClick={() => updateDraft({ sortBy: option.value })}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Filtro de Precio con Slider */}
-      <div className="filter-section">
-        <h4>Rango de Precio</h4>
-        <div className="price-slider">
-          <input
-            type="range"
-            min="0"
-            max="250"
-            value={filters.priceRange.max}
-            onChange={(e) => handlePriceChange('max', e.target.value)}
-            className="price-range"
-          />
-          <div className="price-values">
-            <span>0€</span>
-            <span>{filters.priceRange.max}€</span>
-          </div>
+      <div className="fashion-filter-section">
+        <div className="fashion-filter-section-head">
+          <h4>Precio</h4>
+          <span>Define el rango que mejor encaja contigo</span>
+        </div>
+        <div className="fashion-price-grid">
+          <label>
+            <span>Minimo</span>
+            <input
+              type="number"
+              min="0"
+              max={draftFilters.priceRange.max}
+              value={draftFilters.priceRange.min}
+              onChange={(event) => handlePriceChange('min', event.target.value)}
+            />
+          </label>
+          <label>
+            <span>Maximo</span>
+            <input
+              type="number"
+              min={draftFilters.priceRange.min}
+              max="250"
+              value={draftFilters.priceRange.max}
+              onChange={(event) => handlePriceChange('max', event.target.value)}
+            />
+          </label>
+        </div>
+        <input
+          className="fashion-range"
+          type="range"
+          min="0"
+          max="250"
+          value={draftFilters.priceRange.max}
+          onChange={(event) => handlePriceChange('max', event.target.value)}
+        />
+        <div className="fashion-price-meta">
+          <span>{draftFilters.priceRange.min} EUR</span>
+          <span>{draftFilters.priceRange.max} EUR</span>
         </div>
       </div>
 
-      {/* Filtro de Color */}
-      <div className="filter-section">
-        <h4>Color</h4>
-        <div className="color-options">
+      <div className="fashion-filter-section">
+        <div className="fashion-filter-section-head">
+          <h4>Talla</h4>
+          <span>Selecciona una talla para afinar mejor</span>
+        </div>
+        <div className="fashion-chip-grid fashion-chip-grid--sizes">
           <button
-            className={`color-button ${filters.color === 'negro' ? 'active' : ''}`}
-            style={{ backgroundColor: '#000' }}
-            onClick={() => handleColorChange('negro')}
-          />
-          <button
-            className={`color-button ${filters.color === 'blanco' ? 'active' : ''}`}
-            style={{ backgroundColor: '#fff', border: '1px solid #ddd' }}
-            onClick={() => handleColorChange('blanco')}
-          />
-          <button
-            className={`color-button ${filters.color === 'azul' ? 'active' : ''}`}
-            style={{ backgroundColor: '#0066cc' }}
-            onClick={() => handleColorChange('azul')}
-          />
-          <button
-            className={`color-button ${filters.color === 'rojo' ? 'active' : ''}`}
-            style={{ backgroundColor: '#cc0000' }}
-            onClick={() => handleColorChange('rojo')}
-          />
-          <button
-            className={`color-button ${filters.color === 'verde' ? 'active' : ''}`}
-            style={{ backgroundColor: '#006633' }}
-            onClick={() => handleColorChange('verde')}
-          />
-          <button
-            className={`color-button ${filters.color === 'marron' ? 'active' : ''}`}
-            style={{ backgroundColor: '#8B4513' }}
-            onClick={() => handleColorChange('marron')}
-          />
+            type="button"
+            className={`fashion-chip ${draftFilters.size === '' ? 'is-active' : ''}`}
+            onClick={() => updateDraft({ size: '' })}
+          >
+            Todas
+          </button>
+          {sizes.map((size) => (
+            <button
+              key={size}
+              type="button"
+              className={`fashion-chip ${draftFilters.size === size ? 'is-active' : ''}`}
+              onClick={() => updateDraft({ size })}
+            >
+              {size}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Filtro de Talla */}
-      <div className="filter-section">
-        <h4>Talla</h4>
-        <div className="size-options">
+      <div className="fashion-filter-section">
+        <div className="fashion-filter-section-head">
+          <h4>Color</h4>
+          <span>Elige la tonalidad dominante</span>
+        </div>
+        <div className="fashion-color-grid">
           <button
-            className={filters.size === 'S' ? 'active' : ''}
-            onClick={() => handleSizeChange('S')}
+            type="button"
+            className={`fashion-color-swatch fashion-color-swatch--all ${draftFilters.color === '' ? 'is-active' : ''}`}
+            onClick={() => updateDraft({ color: '' })}
           >
-            S
+            Todos
           </button>
-          <button
-            className={filters.size === 'M' ? 'active' : ''}
-            onClick={() => handleSizeChange('M')}
-          >
-            M
-          </button>
-          <button
-            className={filters.size === 'L' ? 'active' : ''}
-            onClick={() => handleSizeChange('L')}
-          >
-            L
-          </button>
-          <button
-            className={filters.size === 'XL' ? 'active' : ''}
-            onClick={() => handleSizeChange('XL')}
-          >
-            XL
-          </button>
+          {colors.map((color) => (
+            <button
+              key={color.value}
+              type="button"
+              className={`fashion-color-swatch ${draftFilters.color === color.value ? 'is-active' : ''}`}
+              onClick={() => updateDraft({ color: color.value })}
+            >
+              <span className="fashion-color-dot" style={{ backgroundColor: color.hex }} />
+              {color.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      <button className="apply-filters-button" onClick={handleApplyFilters}>
-        Ver resultados
-      </button>
+      <div className="fashion-filter-actions">
+        <button type="button" className="fashion-filter-secondary" onClick={onClear}>
+          Restablecer
+        </button>
+        <button type="button" className="fashion-filter-primary" onClick={handleApply}>
+          Ver resultados
+        </button>
+      </div>
     </div>
   );
 };
 
-export default FilterPanel; 
+export default FilterPanel;

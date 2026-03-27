@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
+import './SupportPages.css';
 import './Contacto.css';
 
 const Contacto = () => {
@@ -8,73 +9,104 @@ const Contacto = () => {
     telefono: '',
     mensaje: ''
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
+    setSubmitted(true);
   };
 
   return (
-    <div className="contacto-container">
-      <div className="contacto-content contacto-content-simple">
-        <h1>Contacto</h1>
-        <p className="contacto-descripcion">
-          No dudes en contactarnos si tienes alguna duda o propuesta a help@fashionshop.com
-        </p>
-        <form className="contacto-form contacto-form-simple" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Su nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Tu correo electrónico"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+    <section className="support-page contacto-page">
+      <div className="support-shell">
+        <div className="support-hero contacto-hero">
+          <p className="support-kicker">Contacto</p>
+          <h1 className="support-title">Hablemos con calma.</h1>
+          <p className="support-subtitle">
+            Si tienes una duda sobre pedidos, tallas, colaboraciones o cualquier detalle del proyecto, te respondemos con un trato claro y cercano.
+          </p>
+        </div>
+
+        <div className="support-grid contacto-grid">
+          <div className="support-card">
+            <h2>Escribenos</h2>
+            <p className="contacto-card-copy">
+              Cuanto mas contexto nos dejes, mejor podremos ayudarte.
+            </p>
+
+            {submitted && (
+              <div className="support-success">
+                Hemos recibido tu mensaje. Te responderemos lo antes posible.
+              </div>
+            )}
+
+            <form className="support-form" onSubmit={handleSubmit}>
+              <div className="support-form-grid">
+                <div className="support-field">
+                  <label htmlFor="nombre">Nombre</label>
+                  <input className="support-input" type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Tu nombre" required />
+                </div>
+                <div className="support-field">
+                  <label htmlFor="email">Email</label>
+                  <input className="support-input" type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="ejemplo@correo.com" required />
+                </div>
+              </div>
+
+              <div className="support-field">
+                <label htmlFor="telefono">Telefono</label>
+                <input className="support-input" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="Opcional" />
+              </div>
+
+              <div className="support-field">
+                <label htmlFor="mensaje">Mensaje</label>
+                <textarea className="support-textarea" id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} placeholder="Cuentanos en que podemos ayudarte" required />
+              </div>
+
+              <div className="support-actions">
+                <button type="submit" className="support-button">Enviar mensaje</button>
+              </div>
+            </form>
           </div>
-          <div className="form-row">
-            <input
-              type="text"
-              name="telefono"
-              placeholder="Tu teléfono (opcional)"
-              value={formData.telefono}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <textarea
-              name="mensaje"
-              placeholder="Tu mensaje"
-              value={formData.mensaje}
-              onChange={handleChange}
-              required
-              rows="6"
-            ></textarea>
-          </div>
-          <button type="submit" className="submit-button submit-button-simple">
-            Enviar mensaje
-          </button>
-        </form>
+
+          <aside className="support-card contacto-aside">
+            <h3>Canales directos</h3>
+            <div className="support-list">
+              <div className="support-list-item">
+                <div className="support-list-icon">@</div>
+                <div>
+                  <strong>Correo</strong>
+                  <p>help@fashionshop.com</p>
+                </div>
+              </div>
+              <div className="support-list-item">
+                <div className="support-list-icon">24</div>
+                <div>
+                  <strong>Respuesta</strong>
+                  <p>Normalmente respondemos en menos de 24 horas laborables.</p>
+                </div>
+              </div>
+              <div className="support-list-item">
+                <div className="support-list-icon">HQ</div>
+                <div>
+                  <strong>Soporte</strong>
+                  <p>Pedidos, devoluciones, incidencias de acceso y consultas generales.</p>
+                </div>
+              </div>
+            </div>
+            <p className="support-note">Tambien puedes revisar FAQ, envios y devoluciones antes de escribirnos.</p>
+          </aside>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Contacto; 
+export default Contacto;
