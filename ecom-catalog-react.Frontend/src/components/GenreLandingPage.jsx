@@ -29,12 +29,12 @@ const GenreLandingPage = ({
       try {
         const response = await fetch(config.productGenreNameUrl(genreName));
         if (!response.ok) {
-          throw new Error('No se pudo cargar la coleccion.');
+          throw new Error('No se pudo cargar la colección.');
         }
         const data = await response.json();
         setProducts(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError(err.message || 'No se pudo cargar la coleccion.');
+        setError(err.message || 'No se pudo cargar la colección.');
       } finally {
         setLoading(false);
       }
@@ -83,7 +83,7 @@ const GenreLandingPage = ({
           <p>{subtitle}</p>
           <div className="genre-hero-actions">
             <button type="button" className="genre-primary-button" onClick={() => navigate(seeAllPath)}>
-              Ver toda la seleccion
+              Ver toda la selección
             </button>
           </div>
         </div>
@@ -92,7 +92,7 @@ const GenreLandingPage = ({
       <div className="genre-shell">
         <section className="genre-intro-card">
           <div>
-            <span className="genre-label">Coleccion curada</span>
+            <span className="genre-label">Nuestra selección</span>
             <h2>{title}</h2>
           </div>
           <p>{description}</p>
@@ -101,11 +101,11 @@ const GenreLandingPage = ({
         <section className="genre-category-section">
           <div className="genre-section-head">
             <div>
-              <span className="genre-label">Categorias</span>
-              <h3>Explora por silueta</h3>
+              <span className="genre-label">Categorías</span>
+              <h3>Compra por categoría</h3>
             </div>
             <Link to={seeAllPath} className="genre-secondary-link">
-              Ver catalogo completo
+              Ver catálogo completo
             </Link>
           </div>
           <div className="genre-category-grid">
@@ -121,7 +121,7 @@ const GenreLandingPage = ({
         <section className="genre-products-section">
           <div className="genre-section-head">
             <div>
-              <span className="genre-label">Seleccion destacada</span>
+              <span className="genre-label">Destacados</span>
               <h3>Piezas para empezar</h3>
             </div>
             {!loading && !error && (
@@ -132,7 +132,7 @@ const GenreLandingPage = ({
           </div>
 
           {loading ? (
-            <div className="genre-state">Cargando seleccion...</div>
+            <div className="genre-state">Cargando selección...</div>
           ) : error ? (
             <div className="genre-state genre-state--error">{error}</div>
           ) : (

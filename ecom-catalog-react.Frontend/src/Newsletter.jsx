@@ -15,7 +15,7 @@ const Newsletter = () => {
     <section className="newsletter-section">
       <h2>Suscríbete a nuestra newsletter</h2>
       {submitted ? (
-        <p className="newsletter-success">¡Gracias por suscribirte!</p>
+        <p className="newsletter-success">Gracias por suscribirte!</p>
       ) : (
         <form className="newsletter-form" onSubmit={handleSubmit}>
           <input

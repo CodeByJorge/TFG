@@ -78,8 +78,8 @@ const LoadingState = () => (
   <div className="catalog-state">
     <div>
       <span className="catalog-state-eyebrow">Cargando</span>
-      <h3>Estamos preparando la seleccion.</h3>
-      <p>En unos segundos tendras todos los productos listos para explorar.</p>
+      <h3>Estamos preparando la selección.</h3>
+      <p>En unos segundos tendrás todos los productos listos para explorar.</p>
     </div>
   </div>
 );
@@ -88,7 +88,7 @@ const ErrorState = ({ message }) => (
   <div className="catalog-state catalog-state--error">
     <div>
       <span className="catalog-state-eyebrow">Ups</span>
-      <h3>No hemos podido cargar esta seccion.</h3>
+      <h3>No hemos podido cargar esta sección.</h3>
       <p>{message}</p>
     </div>
   </div>
@@ -99,7 +99,7 @@ const EmptyState = () => (
     <div>
       <span className="catalog-state-eyebrow">Sin coincidencias</span>
       <h3>No hay resultados con esos filtros.</h3>
-      <p>Prueba con un rango mas amplio o limpia los filtros para volver a ver toda la coleccion.</p>
+      <p>Prueba con otro filtro o vuelve a ver toda la colección.</p>
     </div>
   </div>
 );
@@ -112,6 +112,7 @@ const CatalogPage = ({
   heroClassName,
   eyebrow,
   description,
+  filtro,
 }) => {
   const { user, isLoggedIn } = useAuth();
   const [products, setProducts] = useState([]);
@@ -126,12 +127,12 @@ const CatalogPage = ({
       try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
-          throw new Error('No se pudo cargar el catalogo.');
+          throw new Error('No se pudo cargar el catálogo.');
         }
         const data = await response.json();
         setProducts(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError(err.message || 'No se pudo cargar el catalogo.');
+        setError(err.message || 'No se pudo cargar el catálogo.');
       } finally {
         setLoading(false);
       }
@@ -159,7 +160,15 @@ const CatalogPage = ({
     fetchFavoritos();
   }, [isLoggedIn, user]);
 
-  const visibleProducts = useMemo(() => applyFilters(products, filters), [products, filters]);
+  const filteredByType = useMemo(() => {
+    if (!filtro) return products;
+    if (filtro === 'novedades') return [...products].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 20);
+    if (filtro === 'accesorios') return products.filter(p => p.categoria?.nombre?.toLowerCase().includes('accesorio'));
+    if (filtro === 'rebajas') return products;
+    return products;
+  }, [products, filtro]);
+
+  const visibleProducts = useMemo(() => applyFilters(filteredByType, filters), [filteredByType, filters]);
 
   const handleFavoriteToggle = (productId) => {
     setFavoritos((prevFavoritos) => (
@@ -194,7 +203,7 @@ const CatalogPage = ({
       <div className="catalog-shell">
         <section className="catalog-intro-card">
           <div>
-            <span className="catalog-intro-label">Seleccion curada</span>
+            <span className="catalog-intro-label">Nuestra selección</span>
             <h2>{title}</h2>
           </div>
           <p>{description}</p>
@@ -219,7 +228,7 @@ const CatalogPage = ({
         <section className="catalog-results-shell">
           <div className="catalog-results-meta">
             <div>
-              <span className="catalog-results-label">Catalogo</span>
+              <span className="catalog-results-label">Catálogo</span>
               <strong>{resultsText}</strong>
             </div>
             <button type="button" className="catalog-clear-button" onClick={handleClearFilters}>

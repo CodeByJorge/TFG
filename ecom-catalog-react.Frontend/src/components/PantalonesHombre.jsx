@@ -8,8 +8,8 @@ const PantalonesHombre = () => (
     section="hombre"
     eyebrow="Hombre · Pantalones"
     title="Pantalones para hombre"
-    subtitle="Cortes estructurados y materiales equilibrados para un armario limpio, funcional y actual."
-    description="Simplificamos la navegacion para que el foco este en la coleccion y no en el ruido visual de la pagina."
+    subtitle="Pantalones pensados para vestir bien a diario con un ajuste cómodo y actual."
+    description="Modelos versátiles para combinar con facilidad y crear looks para cualquier momento."
     heroClassName="catalog-hero-hombre-pantalones"
   />
 );

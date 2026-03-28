@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FaShoppingCart, FaTruck, FaTshirt, FaExchangeAlt, FaGift, FaEnvelope
@@ -8,95 +8,95 @@ import './FaqAccordion.css';
 
 export const categorias = [
   {
-    nombre: 'Pedidos y Pagos',
+    nombre: 'Pedidos y pagos',
     slug: 'pedidos-pagos',
     icono: <FaShoppingCart size={24} />,
     preguntas: [
       {
-        pregunta: 'Que metodos de pago aceptan en Fashion?',
-        respuesta: 'Aceptamos pagos con Visa, MasterCard y PayPal. Todos los pagos se procesan de forma segura para proteger tu informacion.'
+        pregunta: '¿Qué métodos de pago aceptan en F. Minimal?',
+        respuesta: 'Aceptamos pagos con Visa, MasterCard y PayPal. Todas las operaciones se procesan de forma segura.'
       },
       {
-        pregunta: 'Necesito crear una cuenta para comprar?',
-        respuesta: 'No es obligatorio, pero si te registras podras hacer seguimiento de tus pedidos, guardar productos favoritos y recibir promociones exclusivas.'
+        pregunta: '¿Necesito crear una cuenta para comprar?',
+        respuesta: 'No es obligatorio, aunque al registrarte podrás guardar favoritos, consultar pedidos y comprar más rápido.'
       },
       {
-        pregunta: 'Puedo modificar o cancelar un pedido ya realizado?',
-        respuesta: 'Solo es posible modificar o cancelar un pedido dentro de las primeras 2 horas despues de realizarlo. Contactanos lo antes posible si necesitas hacerlo.'
+        pregunta: '¿Puedo modificar o cancelar un pedido ya realizado?',
+        respuesta: 'Si tu pedido aún no ha sido preparado, podremos ayudarte a revisarlo. Escríbenos cuanto antes para gestionarlo contigo.'
       }
     ]
   },
   {
-    nombre: 'Envios y Entregas',
+    nombre: 'Envíos y entregas',
     slug: 'envios-entregas',
     icono: <FaTruck size={24} />,
     preguntas: [
       {
-        pregunta: 'Realizan envios internacionales?',
-        respuesta: 'Si, hacemos envios tanto nacionales como internacionales. Los costes y tiempos varian segun el destino y se calculan al finalizar la compra.'
+        pregunta: '¿Realizan envíos internacionales?',
+        respuesta: 'Sí, realizamos envíos nacionales e internacionales. Los costes y plazos se calculan al finalizar la compra según el destino.'
       },
       {
-        pregunta: 'Cuanto tarda en llegar mi pedido?',
-        respuesta: 'Envios nacionales: entre 2 y 5 dias habiles. Envios internacionales: entre 7 y 15 dias habiles, dependiendo del pais.'
+        pregunta: '¿Cuánto tarda en llegar mi pedido?',
+        respuesta: 'Los envíos nacionales suelen tardar entre 2 y 5 días hábiles. Los internacionales, entre 7 y 15 días hábiles según el país.'
       },
       {
-        pregunta: 'Como puedo hacer el seguimiento de mi pedido?',
-        respuesta: 'Una vez enviado, recibiras un correo con el numero de seguimiento y el enlace para rastrear tu paquete en tiempo real.'
+        pregunta: '¿Cómo puedo hacer el seguimiento de mi pedido?',
+        respuesta: 'Cuando tu pedido salga de almacén, recibirás un correo con el número de seguimiento y el enlace para consultarlo.'
       }
     ]
   },
   {
-    nombre: 'Productos y Tallas',
+    nombre: 'Productos y tallas',
     slug: 'productos-tallas',
     icono: <FaTshirt size={24} />,
     preguntas: [
       {
-        pregunta: 'Como elijo la talla correcta?',
-        respuesta: 'Cada producto incluye una guia de tallas. Si tienes dudas, te recomendamos medir una prenda similar que ya tengas y compararla con nuestra tabla.'
+        pregunta: '¿Cómo elijo la talla correcta?',
+        respuesta: 'Cada producto incluye una guía de tallas. Si tienes dudas, compara las medidas con una prenda similar que ya te siente bien.'
       },
       {
-        pregunta: 'Los productos se ven exactamente como en las fotos?',
-        respuesta: 'Si, pero puede haber una ligera variacion de color dependiendo del dispositivo desde el que veas las imagenes.'
+        pregunta: '¿Los productos se ven exactamente como en las fotos?',
+        respuesta: 'Sí, aunque puede existir una ligera variación de color según la pantalla o el dispositivo desde el que consultes la web.'
       }
     ]
   },
   {
-    nombre: 'Cambios y Devoluciones',
+    nombre: 'Cambios y devoluciones',
     slug: 'cambios-devoluciones',
     icono: <FaExchangeAlt size={24} />,
     preguntas: [
       {
-        pregunta: 'Puedo devolver o cambiar un producto si no me queda?',
-        respuesta: 'Si, aceptamos devoluciones y cambios dentro de los 14 dias posteriores a la recepcion, siempre que el producto este sin usar y con su etiqueta original.'
+        pregunta: '¿Puedo devolver o cambiar un producto si no me queda?',
+        respuesta: 'Sí, aceptamos cambios y devoluciones dentro de los 14 días posteriores a la recepción, siempre que la prenda esté sin usar y conserve su etiqueta original.'
       },
       {
-        pregunta: 'Como solicito una devolucion?',
-        respuesta: 'Escribenos a devoluciones@fashion.com con tu numero de pedido y te guiaremos en el proceso.'
+        pregunta: '¿Cómo solicito una devolución?',
+        respuesta: 'Escríbenos a devoluciones@fashion.com con tu número de pedido y te guiaremos paso a paso.'
       }
     ]
   },
   {
-    nombre: 'Promociones y Descuentos',
+    nombre: 'Promociones y descuentos',
     slug: 'promociones-descuentos',
     icono: <FaGift size={24} />,
     preguntas: [
       {
-        pregunta: 'Tienen algun descuento por registrarse?',
-        respuesta: 'Si. Si te suscribes al boletin, recibiras un 10% de descuento en tu primera compra.'
+        pregunta: '¿Tenéis algún descuento por registrarse?',
+        respuesta: 'Sí. Si te suscribes al boletín, recibirás un 10% de descuento en tu primera compra.'
       },
       {
-        pregunta: 'Como uso un codigo de descuento?',
-        respuesta: 'Al finalizar la compra, introduce el codigo en el campo de cupon y se aplicara automaticamente al total.'
+        pregunta: '¿Cómo uso un código de descuento?',
+        respuesta: 'Al finalizar la compra, introduce el código en el campo de cupón y se aplicará automáticamente al total.'
       }
     ]
   },
   {
-    nombre: 'Atencion al Cliente',
+    nombre: 'Atención al cliente',
     slug: 'atencion-cliente',
     icono: <FaEnvelope size={24} />,
     preguntas: [
       {
-        pregunta: 'Como puedo comunicarme con ustedes?',
+        pregunta: '¿Cómo puedo comunicarme con vosotros?',
         respuesta: 'Puedes escribirnos a contacto@fashion.com o por WhatsApp y chat de lunes a viernes, de 9:00 a 18:00.'
       }
     ]
@@ -111,9 +111,9 @@ const FaqAccordion = () => {
       <div className="support-shell">
         <div className="support-hero faq-hero">
           <p className="support-kicker">FAQ</p>
-          <h1 className="support-title">Respuestas para comprar con claridad.</h1>
+          <h1 className="support-title">Respuestas para comprar con tranquilidad.</h1>
           <p className="support-subtitle">
-            Explora las categorias mas consultadas y entra en cada bloque para ver las respuestas de forma ordenada.
+            Explora las categorías más consultadas y entra en cada bloque para encontrar la ayuda que necesitas.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ const FaqAccordion = () => {
               <div className="faq-card-icon">{cat.icono}</div>
               <div className="faq-card-info">
                 <div className="faq-card-title">{cat.nombre}</div>
-                <div className="faq-card-count">{cat.preguntas.length} articulo{cat.preguntas.length > 1 ? 's' : ''}</div>
+                <div className="faq-card-count">{cat.preguntas.length} artículo{cat.preguntas.length > 1 ? 's' : ''}</div>
               </div>
             </button>
           ))}

@@ -8,8 +8,8 @@ const ZapatosHombre = () => (
     section="hombre"
     eyebrow="Hombre · Zapatos"
     title="Zapatos para hombre"
-    subtitle="Piezas esenciales con lineas firmes y una paleta mas sobria para completar looks cotidianos o formales."
-    description="Homogeneizamos esta vista con el resto del sitio para que el catalogo se sienta parte de una misma marca."
+    subtitle="Zapatos versátiles para completar tanto looks diarios como opciones más formales."
+    description="Encuentra pares cómodos y fáciles de llevar para acompañarte a diario."
     heroClassName="catalog-hero-hombre-zapatos"
   />
 );

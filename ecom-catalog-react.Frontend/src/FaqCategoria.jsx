@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categorias } from './FaqAccordion';
 import './SupportPages.css';
@@ -15,7 +15,7 @@ const FaqCategoria = () => {
       <section className="support-page faq-page">
         <div className="support-shell">
           <div className="support-card faq-category-shell">
-            <h2>Categora no encontrada</h2>
+            <h2>Categoría no encontrada</h2>
           </div>
         </div>
       </section>
@@ -34,11 +34,11 @@ const FaqCategoria = () => {
       <div className="support-shell">
         <div className="support-card faq-category-shell">
           <button className="support-link-button faq-back-btn" type="button" onClick={() => navigate('/faq')}>
-            Volver a categorias
+            Volver a categorías
           </button>
           <p className="support-kicker">FAQ</p>
           <h1 className="support-title faq-category-title">{categoria.nombre}</h1>
-          <p className="support-subtitle">Selecciona una pregunta para ver la respuesta desplegada sin perder contexto.</p>
+          <p className="support-subtitle">Selecciona una pregunta para ver la respuesta de forma clara y rápida.</p>
 
           <div className="faq-accordion-list">
             {categoria.preguntas.map((item, qIdx) => (

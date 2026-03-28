@@ -8,8 +8,8 @@ const CamisetasHombre = () => (
     section="hombre"
     eyebrow="Hombre · Camisetas"
     title="Camisetas para hombre"
-    subtitle="Basicos depurados con una estetica contemporanea y tonos pensados para combinar sin esfuerzo."
-    description="Llevamos esta seccion al mismo estandar visual que la home: mas aire, mejor jerarquia y filtros mucho mas claros."
+    subtitle="Básicos cómodos y fáciles de combinar para cualquier plan del día."
+    description="Camisetas para vestir con sencillez, comodidad y un estilo actual."
     heroClassName="catalog-hero-hombre-camisetas"
   />
 );

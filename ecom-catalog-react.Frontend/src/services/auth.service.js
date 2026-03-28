@@ -1,4 +1,4 @@
-﻿import config from '../config';
+import config from '../config';
 const API_URL = config.USERS_URL;
 
 class AuthService {
@@ -38,11 +38,11 @@ class AuthService {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Error en el inicio de sesiÃ³n');
+        throw new Error(data.error || 'Error en el inicio de sesión');
       }
 
       if (!data.token) {
-        throw new Error('No se recibiÃ³ el token de autenticaciÃ³n');
+        throw new Error('No se recibió el token de autenticación');
       }
 
       const userData = {
@@ -103,7 +103,7 @@ class AuthService {
     return this.user?.token;
   }
 
-  // MÃ©todo para validar el token
+  // Método para validar el token
   validateToken() {
     if (!this.user?.token) {
       this.logout();

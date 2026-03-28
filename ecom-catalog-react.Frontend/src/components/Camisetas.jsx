@@ -8,8 +8,8 @@ const Camisetas = () => (
     section="mujer"
     eyebrow="Mujer · Camisetas"
     title="Camisetas para mujer"
-    subtitle="Siluetas depuradas, tejidos comodos y piezas faciles de combinar para el dia a dia."
-    description="Una seleccion pensada para looks ligeros y versatiles, con un lenguaje visual mas limpio y una navegacion mucho mas clara."
+    subtitle="Prendas cómodas y fáciles de combinar para acompañarte todos los días."
+    description="Encuentra camisetas versátiles para llevar a diario, con colores fáciles y cortes que sientan bien."
     heroClassName="catalog-hero-mujer-camisetas"
   />
 );

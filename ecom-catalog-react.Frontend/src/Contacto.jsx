@@ -31,15 +31,15 @@ const Contacto = () => {
           <p className="support-kicker">Contacto</p>
           <h1 className="support-title">Hablemos con calma.</h1>
           <p className="support-subtitle">
-            Si tienes una duda sobre pedidos, tallas, colaboraciones o cualquier detalle del proyecto, te respondemos con un trato claro y cercano.
+            Si tienes dudas sobre pedidos, tallas, cambios o cualquier otra consulta, te respondemos con un trato claro y cercano.
           </p>
         </div>
 
         <div className="support-grid contacto-grid">
           <div className="support-card">
-            <h2>Escribenos</h2>
+            <h2>Escríbenos</h2>
             <p className="contacto-card-copy">
-              Cuanto mas contexto nos dejes, mejor podremos ayudarte.
+              Cuanto más detalle nos dejes, mejor podremos ayudarte.
             </p>
 
             {submitted && (
@@ -61,13 +61,13 @@ const Contacto = () => {
               </div>
 
               <div className="support-field">
-                <label htmlFor="telefono">Telefono</label>
+                <label htmlFor="telefono">Teléfono</label>
                 <input className="support-input" type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="Opcional" />
               </div>
 
               <div className="support-field">
                 <label htmlFor="mensaje">Mensaje</label>
-                <textarea className="support-textarea" id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} placeholder="Cuentanos en que podemos ayudarte" required />
+                <textarea className="support-textarea" id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange} placeholder="Cuéntanos en qué podemos ayudarte" required />
               </div>
 
               <div className="support-actions">
@@ -101,7 +101,7 @@ const Contacto = () => {
                 </div>
               </div>
             </div>
-            <p className="support-note">Tambien puedes revisar FAQ, envios y devoluciones antes de escribirnos.</p>
+            <p className="support-note">También puedes revisar FAQ, envíos y devoluciones antes de escribirnos.</p>
           </aside>
         </div>
       </div>

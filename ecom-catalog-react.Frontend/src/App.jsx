@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import './styles/minimalista.css';
 import { AuthProvider } from './contexts/AuthContext';
@@ -18,6 +18,8 @@ import CamisetasHombre from './components/CamisetasHombre';
 import PantalonesHombre from './components/PantalonesHombre';
 import ZapatosHombre from './components/ZapatosHombre';
 import ChaquetasHombre from './components/ChaquetasHombre';
+import CatalogPage from './components/CatalogPage';
+import config from './config';
 import Camisetas from './components/Camisetas';
 import Pantalones from './components/Pantalones';
 import Vestidos from './components/Vestidos';
@@ -34,23 +36,12 @@ import Envios from './Envios';
 import SearchResult from './components/SearchResult';
 import TodosProductosMujer from './pages/TodosProductosMujer';
 import TodosProductosHombre from './pages/TodosProductosHombre';
+import MiCuenta from './pages/MiCuenta';
 
 function App() {
-  const HeaderWrapper = () => {
-    const location = useLocation();
-    if (location.pathname === '/devoluciones') {
-      return null;
-    }
-    return <HeaderMinimalista />;
-  };
+  const HeaderWrapper = () => <HeaderMinimalista />;
 
-  const FooterWrapper = () => {
-    const location = useLocation();
-    if (location.pathname === '/devoluciones') {
-      return null;
-    }
-    return <FooterMinimalista />;
-  };
+  const FooterWrapper = () => <FooterMinimalista />;
 
   return (
     <AuthProvider>
@@ -69,11 +60,17 @@ function App() {
                     <Route path="/hombres/pantalones" element={<PantalonesHombre />} />
                     <Route path="/hombres/zapatos" element={<ZapatosHombre />} />
                     <Route path="/hombres/chaquetas" element={<ChaquetasHombre />} />
+                    <Route path="/hombres/novedades" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Hombres`} title="Novedades" subtitle="Lo último en moda masculina" section="hombre" eyebrow="New in" description="Descubre las últimas incorporaciones a nuestra colección." filtro="novedades" />} />
+                    <Route path="/hombres/accesorios" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Hombres`} title="Accesorios" subtitle="Complementa tu estilo" section="hombre" eyebrow="Accesorios" description="Relojes, cinturones, carteras y más." filtro="accesorios" />} />
+                    <Route path="/hombres/rebajas" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Hombres`} title="Rebajas" subtitle="Las mejores ofertas en moda" section="hombre" eyebrow="Sale" description="Productos seleccionados con descuento." filtro="rebajas" />} />
                     <Route path="/mujeres" element={<Mujeres />} />
                     <Route path="/mujeres/camisetas" element={<Camisetas />} />
                     <Route path="/mujeres/pantalones" element={<Pantalones />} />
                     <Route path="/mujeres/vestidos" element={<Vestidos />} />
                     <Route path="/mujeres/zapatos" element={<Zapatos />} />
+                    <Route path="/mujeres/novedades" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Mujeres`} title="Novedades" subtitle="Lo último en moda femenina" section="mujer" eyebrow="New in" description="Descubre las últimas incorporaciones a nuestra colección." filtro="novedades" />} />
+                    <Route path="/mujeres/accesorios" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Mujeres`} title="Accesorios" subtitle="Complementa tu estilo" section="mujer" eyebrow="Accesorios" description="Bolsos, cinturones, joyería y más." filtro="accesorios" />} />
+                    <Route path="/mujeres/rebajas" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Mujeres`} title="Rebajas" subtitle="Las mejores ofertas en moda" section="mujer" eyebrow="Sale" description="Productos seleccionados con descuento." filtro="rebajas" />} />
                     <Route path="/todos-productos-mujer" element={<TodosProductosMujer />} />
                     <Route path="/todos-productos-hombre" element={<TodosProductosHombre />} />
                     <Route path="/favoritos" element={<Favoritos />} />
@@ -88,6 +85,7 @@ function App() {
                     <Route path="/faq/:slug" element={<FaqCategoria />} />
                     <Route path="/envios" element={<Envios />} />
                     <Route path="/buscar" element={<SearchResult />} />
+                    <Route path="/mi-cuenta" element={<ProtectedRoute><MiCuenta /></ProtectedRoute>} />
                     <Route
                       path="/admin"
                       element={(

@@ -6,10 +6,10 @@ const TodosProductosHombre = () => (
   <CatalogPage
     apiUrl={config.productGenreNameUrl('Hombres')}
     section="hombre"
-    eyebrow="Hombre · Todas las categorias"
-    title="Toda la seleccion de hombre"
-    subtitle="Una vista completa para recorrer la coleccion masculina con calma, claridad y un tono mas editorial."
-    description="Explora camisetas, pantalones, chaquetas y zapatos en una sola seleccion pensada para que encontrar una pieza se sienta simple y natural."
+    eyebrow="Hombre · Todas las categorías"
+    title="Toda la selección de hombre"
+    subtitle="Recorre toda la colección masculina y encuentra fácilmente lo que te apetece llevar."
+    description="Camisetas, pantalones, chaquetas y zapatos reunidos en una sola página para que comprar resulte cómodo y rápido."
     heroClassName="catalog-hero-hombre-todos"
   />
 );

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import './SupportPages.css';
 import './Envios.css';
 
@@ -11,22 +11,22 @@ const Envios = () => {
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    setMessage(`Busqueda preparada para ${email} y CP ${codigoPostal}.`);
+    setMessage(`Hemos localizado la consulta para ${email} con el código postal ${codigoPostal}.`);
   };
 
   const handlePedidoSubmit = (e) => {
     e.preventDefault();
-    setMessage(`Busqueda preparada para el pedido ${pedido}.`);
+    setMessage(`Hemos preparado la búsqueda del pedido ${pedido}.`);
   };
 
   return (
     <section className="support-page envios-page">
       <div className="support-shell">
         <div className="support-hero envios-hero">
-          <p className="support-kicker">Envios</p>
-          <h1 className="support-title">Localiza tu pedido.</h1>
+          <p className="support-kicker">Envíos</p>
+          <h1 className="support-title">Sigue tu pedido en pocos pasos.</h1>
           <p className="support-subtitle">
-            Consulta el estado de tu envio con una experiencia mas clara y ligera, manteniendo la misma linea visual del resto de la tienda.
+            Consulta el estado de tu envío y revisa los plazos habituales de entrega de forma rápida y sencilla.
           </p>
         </div>
 
@@ -34,10 +34,10 @@ const Envios = () => {
           <div className="support-card">
             <div className="envios-toggle-row">
               <button className={`support-toggle ${searchType === 'email' ? 'is-active' : ''}`} type="button" onClick={() => setSearchType('email')}>
-                Email y codigo postal
+                Email y código postal
               </button>
               <button className={`support-toggle ${searchType === 'pedido' ? 'is-active' : ''}`} type="button" onClick={() => setSearchType('pedido')}>
-                Numero de pedido
+                Número de pedido
               </button>
             </div>
 
@@ -46,22 +46,48 @@ const Envios = () => {
             {searchType === 'email' ? (
               <form onSubmit={handleEmailSubmit} className="support-form">
                 <div className="support-field">
-                  <label htmlFor="email">Correo electronico</label>
-                  <input className="support-input" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="ejemplo@correo.com" required />
+                  <label htmlFor="email">Correo electrónico</label>
+                  <input
+                    className="support-input"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="ejemplo@correo.com"
+                    required
+                  />
                 </div>
                 <div className="support-field">
-                  <label htmlFor="codigoPostal">Codigo postal</label>
-                  <input className="support-input" type="text" id="codigoPostal" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} placeholder="5 digitos" pattern="[0-9]{5}" maxLength="5" required />
+                  <label htmlFor="codigoPostal">Código postal</label>
+                  <input
+                    className="support-input"
+                    type="text"
+                    id="codigoPostal"
+                    value={codigoPostal}
+                    onChange={(e) => setCodigoPostal(e.target.value)}
+                    placeholder="5 dígitos"
+                    pattern="[0-9]{5}"
+                    maxLength="5"
+                    required
+                  />
                 </div>
                 <div className="support-actions">
-                  <button type="submit" className="support-button">Buscar envio</button>
+                  <button type="submit" className="support-button">Buscar envío</button>
                 </div>
               </form>
             ) : (
               <form onSubmit={handlePedidoSubmit} className="support-form">
                 <div className="support-field">
-                  <label htmlFor="pedido">Numero de pedido</label>
-                  <input className="support-input" type="text" id="pedido" value={pedido} onChange={(e) => setPedido(e.target.value)} placeholder="Ej. FM-2026-0142" required />
+                  <label htmlFor="pedido">Número de pedido</label>
+                  <input
+                    className="support-input"
+                    type="text"
+                    id="pedido"
+                    value={pedido}
+                    onChange={(e) => setPedido(e.target.value)}
+                    placeholder="Ej. FM-2026-0142"
+                    required
+                  />
                 </div>
                 <div className="support-actions">
                   <button type="submit" className="support-button">Buscar pedido</button>
@@ -71,27 +97,27 @@ const Envios = () => {
           </div>
 
           <aside className="support-card envios-aside">
-            <h3>Informacion util</h3>
+            <h3>Información útil</h3>
             <div className="support-list">
               <div className="support-list-item">
                 <div className="support-list-icon">48h</div>
                 <div>
-                  <strong>Preparacion</strong>
+                  <strong>Preparación</strong>
                   <p>Los pedidos suelen prepararse entre 24 y 48 horas laborables.</p>
                 </div>
               </div>
               <div className="support-list-item">
                 <div className="support-list-icon">ES</div>
                 <div>
-                  <strong>Envio nacional</strong>
-                  <p>Entre 2 y 5 dias habiles, segun el destino.</p>
+                  <strong>Envío nacional</strong>
+                  <p>Entre 2 y 5 días hábiles, según el destino.</p>
                 </div>
               </div>
               <div className="support-list-item">
                 <div className="support-list-icon">INT</div>
                 <div>
-                  <strong>Envio internacional</strong>
-                  <p>Entre 7 y 15 dias habiles, con seguimiento incluido.</p>
+                  <strong>Envío internacional</strong>
+                  <p>Entre 7 y 15 días hábiles, con seguimiento incluido.</p>
                 </div>
               </div>
             </div>
@@ -103,3 +129,4 @@ const Envios = () => {
 };
 
 export default Envios;
+

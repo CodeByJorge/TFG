@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './AuthPages.css';
 
@@ -14,7 +14,7 @@ const RecuperarContrasena = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.trim()) {
-      setError('Introduce tu correo electronico para continuar.');
+      setError('Introduce tu correo electrónico para continuar.');
       return;
     }
     setSubmitted(true);
@@ -26,32 +26,32 @@ const RecuperarContrasena = () => {
       <div className="auth-layout">
         <aside className="auth-aside" style={heroStyle}>
           <div className="auth-aside-copy">
-            <p className="auth-kicker">Recuperacion</p>
+            <p className="auth-kicker">Recuperación</p>
             <h1>Recupera el acceso a tu cuenta.</h1>
             <p>
-              Te enviaremos un enlace para volver a entrar y seguir con tu seleccion guardada.
+              Te enviaremos un enlace para volver a entrar y seguir comprando con normalidad.
             </p>
           </div>
         </aside>
 
         <div className="auth-panel">
           <p className="auth-kicker">Soporte</p>
-          <h2>Recuperar contrasena</h2>
+          <h2>Recuperar contraseña</h2>
           <p className="auth-panel-intro">
-            Introduce tu email y prepararemos el siguiente paso para que puedas restablecer el acceso.
+            Introduce tu correo electrónico y te enviaremos las indicaciones para recuperar tu cuenta.
           </p>
 
           {submitted ? (
             <div className="auth-success">
               <p className="auth-panel-intro">
-                Hemos preparado el envio del enlace de recuperacion a <strong>{email}</strong>.
+                Hemos preparado el envío del enlace de recuperación a <strong>{email}</strong>.
               </p>
               <Link to="/login" className="auth-primary">Volver al login</Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="auth-field">
-                <label htmlFor="email">Correo electronico</label>
+                <label htmlFor="email">Correo electrónico</label>
                 <input
                   className="auth-input"
                   type="email"

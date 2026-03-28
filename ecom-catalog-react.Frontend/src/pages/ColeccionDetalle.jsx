@@ -82,10 +82,10 @@ const ColeccionDetalle = () => {
             onChange={(e) => handleFiltroChange('precio', e.target.value)}
           >
             <option value="todos">Todos los precios</option>
-            <option value="0-25">Menos de 25€</option>
-            <option value="25-50">25€ - 50€</option>
-            <option value="50-100">50€ - 100€</option>
-            <option value="100-999">Más de 100€</option>
+            <option value="0-25">Menos de 25</option>
+            <option value="25-50">25 - 50</option>
+            <option value="50-100">50 - 100</option>
+            <option value="100-999">Más de 100</option>
           </select>
         </div>
 
@@ -129,7 +129,7 @@ const ColeccionDetalle = () => {
             </div>
             <div className="producto-info">
               <h3>{producto.nombre}</h3>
-              <p className="producto-precio">{producto.precio}€</p>
+              <p className="producto-precio">{producto.precio}</p>
               <p className="producto-descripcion">{producto.descripcion}</p>
               <div className="producto-tallas">
                 {producto.talla.map(t => (

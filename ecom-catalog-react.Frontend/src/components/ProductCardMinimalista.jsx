@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ProductCard Minimalista
  *
  * Tarjeta de producto elegante y funcional inspirada en las mejores tiendas de moda.
@@ -114,19 +114,23 @@ const ProductCardMinimalista = ({ product }) => {
         <div className="product-info">
           <h3 className="product-name">{product.nombre}</h3>
 
-          {product.categoria && (
+          {product.stock === 0 ? (
+            <span className="product-category" style={{ color: '#888', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Agotado</span>
+          ) : product.stock != null && product.stock < 5 ? (
+            <span className="product-category" style={{ color: '#b45309', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Últimas unidades</span>
+          ) : product.categoria ? (
             <span className="product-category">
               {product.categoria.nombre}
             </span>
-          )}
+          ) : null}
 
           <div className="product-price-container">
             <span className="product-price">
-              {product.precio}€
+              {product.precio}
             </span>
             {product.precioAnterior && (
               <span className="product-price-original">
-                {product.precioAnterior}€
+                {product.precioAnterior}
               </span>
             )}
           </div>

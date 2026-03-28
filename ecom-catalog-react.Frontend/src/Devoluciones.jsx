@@ -1,4 +1,5 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SupportPages.css';
 import './Devoluciones.css';
 
@@ -16,7 +17,7 @@ const Devoluciones = () => {
       return;
     }
     setError('');
-    setSuccess(`Solicitud preparada para el pedido ${pedido}.`);
+    setSuccess(`Hemos preparado tu solicitud para el pedido ${pedido}.`);
   };
 
   return (
@@ -24,20 +25,24 @@ const Devoluciones = () => {
       <div className="support-shell">
         <div className="support-hero devoluciones-hero">
           <p className="support-kicker">Cambios y devoluciones</p>
-          <h1 className="support-title">Gestiona tu devolucion sin friccion.</h1>
+          <h1 className="support-title">Gestiona tu devolución de forma sencilla.</h1>
           <p className="support-subtitle">
-            Inicia el proceso con los datos de tu pedido original y consulta en un vistazo las condiciones principales.
+            Inicia el proceso con los datos de tu pedido y revisa en un momento las condiciones principales.
           </p>
+          <div className="support-actions">
+            <Link to="/" className="support-link-button is-dark">Ir al inicio</Link>
+            <Link to="/contacto" className="support-link-button">Necesito ayuda</Link>
+          </div>
         </div>
 
         <div className="support-grid devoluciones-grid">
           <div className="support-card">
             <h2>Buscar pedido</h2>
-            <p className="support-note">Necesitamos tu numero de pedido y el correo asociado a la compra.</p>
+            <p className="support-note">Necesitamos tu número de pedido y el correo asociado a la compra.</p>
 
             <form className="support-form" onSubmit={handleSubmit}>
               <div className="support-field">
-                <label htmlFor="pedido">Numero de pedido</label>
+                <label htmlFor="pedido">Número de pedido</label>
                 <input className="support-input" type="text" id="pedido" placeholder="Ej. FM-2026-0142" value={pedido} onChange={(e) => setPedido(e.target.value)} />
               </div>
               <div className="support-field">
@@ -50,6 +55,7 @@ const Devoluciones = () => {
 
               <div className="support-actions">
                 <button type="submit" className="support-button">Continuar</button>
+                <Link to="/contacto" className="support-link-button">Contactar con soporte</Link>
               </div>
             </form>
           </div>
@@ -61,21 +67,21 @@ const Devoluciones = () => {
                 <div className="support-list-icon">14d</div>
                 <div>
                   <strong>Plazo</strong>
-                  <p>Puedes solicitar cambios o devoluciones dentro de los 14 dias posteriores a la entrega.</p>
+                  <p>Puedes solicitar cambios o devoluciones dentro de los 14 días posteriores a la entrega.</p>
                 </div>
               </div>
               <div className="support-list-item">
                 <div className="support-list-icon">OK</div>
                 <div>
                   <strong>Estado</strong>
-                  <p>La prenda debe conservar etiqueta, embalaje y no presentar uso.</p>
+                  <p>La prenda debe conservar su etiqueta, su embalaje y no presentar signos de uso.</p>
                 </div>
               </div>
               <div className="support-list-item">
                 <div className="support-list-icon">INFO</div>
                 <div>
                   <strong>Ayuda</strong>
-                  <p>Si tu pedido presenta una incidencia, contacta antes con soporte para agilizar el proceso.</p>
+                  <p>Si tu pedido tiene una incidencia, escríbenos antes para ayudarte a resolverlo más rápido.</p>
                 </div>
               </div>
             </div>

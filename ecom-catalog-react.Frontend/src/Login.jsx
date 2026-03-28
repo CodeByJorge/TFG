@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import './AuthPages.css';
@@ -27,7 +27,7 @@ const Login = () => {
       if (err.message.includes('Credenciales invalidas')) {
         navigate('/registro', { state: { email: formData.email } });
       } else {
-        setError('No hemos podido iniciar sesion. Revisa tus datos e intentalo de nuevo.');
+        setError('No hemos podido iniciar sesión. Revisa tus datos e inténtalo de nuevo.');
       }
     } finally {
       setIsLoading(false);
@@ -55,9 +55,9 @@ const Login = () => {
 
         <div className="auth-panel">
           <p className="auth-kicker">Acceso</p>
-          <h2>Iniciar sesion</h2>
+          <h2>Iniciar sesión</h2>
           <p className="auth-panel-intro">
-            Accede a tu cuenta para guardar prendas, gestionar pedidos y mantener tu seleccion sincronizada.
+            Accede a tu cuenta para guardar prendas, gestionar pedidos y mantener tus favoritos y tu carrito siempre a mano.
           </p>
 
           <form onSubmit={handleSubmit} className="auth-form">
@@ -76,7 +76,7 @@ const Login = () => {
             </div>
 
             <div className="auth-field">
-              <label htmlFor="password">Contrasena</label>
+              <label htmlFor="password">Contraseña</label>
               <div className="auth-input-wrap">
                 <input
                   className="auth-input has-toggle"
@@ -86,7 +86,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  placeholder="Escribe tu contrasena"
+                  placeholder="Escribe tu contraseña"
                 />
                 <button type="button" className="auth-toggle" onClick={() => setShowPassword((value) => !value)}>
                                     {showPassword ? (
@@ -113,14 +113,14 @@ const Login = () => {
                 {isLoading ? 'Entrando...' : 'Entrar'}
               </button>
               <Link to="/recuperar-contrasena" className="auth-inline-link">
-                Has olvidado tu contrasena?
+                Has olvidado tu contraseña?
               </Link>
             </div>
           </form>
 
           <div className="auth-footer">
             <p>
-              Aun no tienes cuenta? <Link to="/registro" className="auth-text-link">Crear una ahora</Link>
+              Aún no tienes cuenta? <Link to="/registro" className="auth-text-link">Crear una ahora</Link>
             </p>
           </div>
         </div>

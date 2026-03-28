@@ -8,8 +8,8 @@ const ChaquetasHombre = () => (
     section="hombre"
     eyebrow="Hombre · Chaquetas"
     title="Chaquetas para hombre"
-    subtitle="Capas exteriores con caracter sereno, textura discreta y presencia sobria para cualquier temporada."
-    description="Esta seccion gana profundidad visual con una base mas premium y un sistema de filtrado alineado con el resto del catalogo."
+    subtitle="Chaquetas para completar el look con abrigo, estilo y un acabado actual."
+    description="Descubre chaquetas pensadas para entretiempo y para los días en los que apetece ir un poco más arreglado."
     heroClassName="catalog-hero-hombre-chaquetas"
   />
 );

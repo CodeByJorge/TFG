@@ -8,8 +8,8 @@ const Vestidos = () => (
     section="mujer"
     eyebrow="Mujer · Vestidos"
     title="Vestidos para mujer"
-    subtitle="Disenos serenos, con caida suave y presencia elegante para ocasiones cotidianas o especiales."
-    description="Esta vista ahora prioriza la calma visual, la legibilidad y una exploracion mas intuitiva de la coleccion."
+    subtitle="Vestidos con una caída natural y un estilo fácil de llevar en cualquier ocasión."
+    description="Una selección de vestidos para vestir cómoda, femenina y con un punto elegante."
     heroClassName="catalog-hero-mujer-vestidos"
   />
 );

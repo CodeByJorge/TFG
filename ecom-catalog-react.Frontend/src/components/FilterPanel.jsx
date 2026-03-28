@@ -14,7 +14,7 @@ const colors = [
   { label: 'Blanco', value: 'blanco', hex: '#f6f3ee' },
   { label: 'Azul', value: 'azul', hex: '#5f7592' },
   { label: 'Beige', value: 'beige', hex: '#d8c7af' },
-  { label: 'Marron', value: 'marron', hex: '#8b6b53' },
+  { label: 'Marrón', value: 'marron', hex: '#8b6b53' },
   { label: 'Verde', value: 'verde', hex: '#667860' },
 ];
 
@@ -31,7 +31,7 @@ const FilterPanel = ({
   onClose,
   onClear = () => {},
   productCount = 0,
-  title = 'Catalogo',
+  title = 'Catálogo',
 }) => {
   const [draftFilters, setDraftFilters] = useState(filters);
 
@@ -62,9 +62,9 @@ const FilterPanel = ({
     <div className="filter-panel fashion-filter-panel">
       <div className="fashion-filter-header">
         <div>
-          <span className="fashion-filter-eyebrow">Editar seleccion</span>
+          <span className="fashion-filter-eyebrow">Editar selección</span>
           <h3>{title}</h3>
-          <p>{productCount} resultados con la configuracion actual.</p>
+          <p>{productCount} resultados con la configuración actual.</p>
         </div>
         <button type="button" className="fashion-filter-close" onClick={onClose} aria-label="Cerrar filtros">
           x
@@ -74,7 +74,7 @@ const FilterPanel = ({
       <div className="fashion-filter-section">
         <div className="fashion-filter-section-head">
           <h4>Orden</h4>
-          <span>Como quieres explorar la coleccion</span>
+          <span>Cómo quieres explorar la colección</span>
         </div>
         <div className="fashion-chip-grid">
           {sortOptions.map((option) => (
@@ -97,7 +97,7 @@ const FilterPanel = ({
         </div>
         <div className="fashion-price-grid">
           <label>
-            <span>Minimo</span>
+            <span>Mínimo</span>
             <input
               type="number"
               min="0"
@@ -107,7 +107,7 @@ const FilterPanel = ({
             />
           </label>
           <label>
-            <span>Maximo</span>
+            <span>Máximo</span>
             <input
               type="number"
               min={draftFilters.priceRange.min}
@@ -160,7 +160,7 @@ const FilterPanel = ({
       <div className="fashion-filter-section">
         <div className="fashion-filter-section-head">
           <h4>Color</h4>
-          <span>Elige la tonalidad dominante</span>
+          <span>Elige el color que prefieras</span>
         </div>
         <div className="fashion-color-grid">
           <button

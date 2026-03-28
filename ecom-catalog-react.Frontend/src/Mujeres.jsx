@@ -6,17 +6,17 @@ const Mujeres = () => (
   <GenreLandingPage
     genreName="Mujeres"
     section="mujer"
-    eyebrow="Mujer · Seleccion principal"
-    title="Coleccion mujer"
-    subtitle="Una portada mas elegante para recorrer la coleccion femenina con equilibrio visual y una jerarquia mucho mas clara."
-    description="Camisetas, pantalones, vestidos y zapatos conviven ahora en una entrada editorial, ligera y coherente con el nuevo tono de la tienda."
+    eyebrow="Mujer · Selección principal"
+    title="Colección mujer"
+    subtitle="Descubre prendas versátiles para vestir con personalidad en cualquier momento del día."
+    description="Camisetas, pantalones, vestidos y zapatos reunidos para que encuentres lo que te apetece de forma rápida y cómoda."
     heroClassName="genre-hero-mujer"
     seeAllPath="/todos-productos-mujer"
     categories={[
-      { name: 'Camisetas', path: '/mujeres/camisetas', copy: 'Piezas ligeras y faciles de combinar.' },
-      { name: 'Pantalones', path: '/mujeres/pantalones', copy: 'Cortes definidos para looks cotidianos.' },
-      { name: 'Vestidos', path: '/mujeres/vestidos', copy: 'Siluetas suaves para dias y ocasiones especiales.' },
-      { name: 'Zapatos', path: '/mujeres/zapatos', copy: 'Pares serenos que cierran el estilismo.' },
+      { name: 'Camisetas', path: '/mujeres/camisetas', copy: 'Piezas ligeras y fáciles de combinar.' },
+      { name: 'Pantalones', path: '/mujeres/pantalones', copy: 'Cortes definidos para looks de todos los días.' },
+      { name: 'Vestidos', path: '/mujeres/vestidos', copy: 'Siluetas suaves para el día y para ocasiones especiales.' },
+      { name: 'Zapatos', path: '/mujeres/zapatos', copy: 'Pares que completan el look con un toque elegante.' },
     ]}
   />
 );

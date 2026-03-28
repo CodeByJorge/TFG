@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
@@ -144,8 +144,13 @@ const HeaderMinimalista = () => {
               <button className="fashion-pill-button fashion-user-button" type="button">
                 {user.nombre}
               </button>
+              <Link to="/mi-cuenta" className="fashion-pill-button" style={{ fontSize: '0.8rem' }}>Mi cuenta</Link>
               {user.rol === 'ADMIN' && (
-                <Link to="/admin" className="fashion-pill-button fashion-admin-link">Admin</Link>
+                <Link to="/admin" className="fashion-pill-button fashion-admin-link" aria-label="Panel de administración">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </Link>
               )}
               <button className="fashion-pill-button fashion-logout" type="button" onClick={logout}>
                 Salir

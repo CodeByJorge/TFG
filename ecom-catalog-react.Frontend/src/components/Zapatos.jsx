@@ -8,8 +8,8 @@ const Zapatos = () => (
     section="mujer"
     eyebrow="Mujer · Zapatos"
     title="Zapatos para mujer"
-    subtitle="Lineas limpias, acabados sobrios y pares disenados para completar el look sin recargarlo."
-    description="Conservamos el catalogo, pero la experiencia pasa a sentirse mas pulida, ligera y alineada con la estetica general de la tienda."
+    subtitle="Zapatos para completar cada look con comodidad y estilo."
+    description="Encuentra pares versátiles para el día a día y para momentos más especiales."
     heroClassName="catalog-hero-mujer-zapatos"
   />
 );

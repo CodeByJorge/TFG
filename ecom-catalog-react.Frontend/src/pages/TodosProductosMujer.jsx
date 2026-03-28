@@ -6,10 +6,10 @@ const TodosProductosMujer = () => (
   <CatalogPage
     apiUrl={config.productGenreNameUrl('Mujeres')}
     section="mujer"
-    eyebrow="Mujer · Todas las categorias"
-    title="Toda la seleccion de mujer"
-    subtitle="Una vista completa para descubrir la coleccion femenina con una navegacion serena y un ritmo visual mas elegante."
-    description="Camisetas, pantalones, vestidos y zapatos reunidos en una sola pagina para que explorar el catalogo se sienta ligero, claro y natural."
+    eyebrow="Mujer · Todas las categorías"
+    title="Toda la selección de mujer"
+    subtitle="Descubre toda la colección femenina y encuentra tus prendas favoritas en un solo vistazo."
+    description="Camisetas, pantalones, vestidos y zapatos reunidos en una sola página para que comprar sea sencillo y agradable."
     heroClassName="catalog-hero-mujer-todos"
   />
 );

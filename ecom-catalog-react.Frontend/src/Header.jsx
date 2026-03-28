@@ -32,14 +32,14 @@ const CartPreview = ({ cart = [], onViewCart }) => {
                 <div className="cart-preview-info">
                   <span className="cart-preview-name">{item.nombre}</span>
                   <span className="cart-preview-qty">x{item.quantity}</span>
-                  <span className="cart-preview-price">{item.precio}€</span>
+                  <span className="cart-preview-price">{item.precio}</span>
                 </div>
               </li>
             ))}
           </ul>
           <div className="cart-preview-total">
             <span>Total:</span>
-            <span>{total.toFixed(2)}€</span>
+            <span>{total.toFixed(2)}</span>
           </div>
           <button className="cart-preview-btn" onClick={onViewCart}>Ver carrito</button>
         </>
@@ -65,7 +65,7 @@ const Header = ({ onCartClick }) => {
   const { favoritesCount, animatingProduct, setAnimatingProduct } = useFavorites();
   const [heartAnimation, setHeartAnimation] = useState(null);
 
-  // Referencias para los contenedores de los menús
+  // Referencias para los contenedores de los mens
   const hombresMenuRef = useRef(null);
   const mujeresMenuRef = useRef(null);
 
@@ -123,7 +123,7 @@ const Header = ({ onCartClick }) => {
     };
   }, [searchTerm]);
 
-  // Bloquear scroll del body cuando la búsqueda está abierta
+  // Bloquear scroll del body cuando la búsqueda est abierta
   useEffect(() => {
     if (isSearchOpen) {
       document.body.style.overflow = 'hidden';
@@ -236,10 +236,13 @@ const Header = ({ onCartClick }) => {
               </svg>
             </Link>
             <div className={`dropdown-menu ${isMujeresMenuOpen ? 'show' : ''}`}>
+              <Link to="/mujeres/novedades" className="dropdown-item">Novedades</Link>
               <Link to="/mujeres/camisetas" className="dropdown-item">Camisetas</Link>
               <Link to="/mujeres/pantalones" className="dropdown-item">Pantalones</Link>
               <Link to="/mujeres/vestidos" className="dropdown-item">Vestidos</Link>
               <Link to="/mujeres/zapatos" className="dropdown-item">Zapatos</Link>
+              <Link to="/mujeres/accesorios" className="dropdown-item">Accesorios</Link>
+              <Link to="/mujeres/rebajas" className="dropdown-item" style={{ color: '#c41e3a', fontWeight: 600 }}>Rebajas</Link>
             </div>
           </li>
           <li 
@@ -267,10 +270,13 @@ const Header = ({ onCartClick }) => {
               </svg>
             </Link>
             <div className={`dropdown-menu ${isHombresMenuOpen ? 'show' : ''}`}>
+              <Link to="/hombres/novedades" className="dropdown-item">Novedades</Link>
               <Link to="/hombres/camisetas" className="dropdown-item">Camisetas</Link>
               <Link to="/hombres/pantalones" className="dropdown-item">Pantalones</Link>
               <Link to="/hombres/chaquetas" className="dropdown-item">Chaquetas</Link>
               <Link to="/hombres/zapatos" className="dropdown-item">Zapatos</Link>
+              <Link to="/hombres/accesorios" className="dropdown-item">Accesorios</Link>
+              <Link to="/hombres/rebajas" className="dropdown-item" style={{ color: '#c41e3a', fontWeight: 600 }}>Rebajas</Link>
             </div>
           </li>
           <li>
@@ -344,11 +350,14 @@ const Header = ({ onCartClick }) => {
             </button>
             {isMenuOpen && (
               <div className="user-dropdown">
-                <Link to="/perfil" className="dropdown-item">Perfil</Link>
+                <Link to="/mi-cuenta" className="dropdown-item">Mi cuenta</Link>
                 {user.rol === 'ADMIN' && (
-                  <Link to="/admin" className="dropdown-item">Panel de Administración</Link>
+                  <Link to="/admin" className="dropdown-item" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Admin
+                  </Link>
                 )}
-               
+
                 <button className="dropdown-item" onClick={logout}>Cerrar sesión</button>
               </div>
             )}
@@ -424,7 +433,7 @@ const Header = ({ onCartClick }) => {
                         <div className="search-result-info">
                           <h5>{product.nombre}</h5>
                           <p>{product.categoria?.nombre}</p>
-                          <p className="search-result-price">{product.precio}€</p>
+                          <p className="search-result-price">{product.precio}</p>
                         </div>
                       </div>
                     ))}

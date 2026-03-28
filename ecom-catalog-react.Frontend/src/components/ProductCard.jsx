@@ -68,7 +68,7 @@ const ProductCard = ({
         setShowNotification(false);
       }, 2000);
     } catch (error) {
-      console.error('Error al anadir al carrito:', error);
+      console.error('Error al añadir al carrito:', error);
     } finally {
       setIsAddingToCart(false);
     }
@@ -134,14 +134,20 @@ const ProductCard = ({
 
         {showNotification && (
           <div className="cart-notification">
-            Producto anadido al carrito
+            Producto añadido al carrito
           </div>
         )}
       </div>
 
       <div className="card-body product-info">
         <div className="product-copy">
-          <span className="product-kicker">Seleccion</span>
+          {product.stock === 0 ? (
+            <span className="product-kicker" style={{ color: '#888', background: 'rgba(0,0,0,0.05)', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Agotado</span>
+          ) : product.stock != null && product.stock < 5 ? (
+            <span className="product-kicker" style={{ color: '#b45309', background: 'rgba(180,83,9,0.08)', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Últimas unidades</span>
+          ) : (
+            <span className="product-kicker">Disponible</span>
+          )}
           <h6 className="card-title product-title">{product.nombre}</h6>
           <p className="card-text">{product.descripcion}</p>
         </div>

@@ -8,8 +8,8 @@ const Pantalones = () => (
     section="mujer"
     eyebrow="Mujer · Pantalones"
     title="Pantalones para mujer"
-    subtitle="Patrones fluidos, cortes definidos y tonos neutros para elevar el armario diario."
-    description="Reordenamos esta categoria para que se sienta mas editorial, mas ligera y coherente con el lenguaje de la landing."
+    subtitle="Pantalones cómodos y versátiles para combinar a diario con facilidad."
+    description="Descubre pantalones pensados para el día a día, con cortes favorecedores y tejidos agradables."
     heroClassName="catalog-hero-mujer-pantalones"
   />
 );
