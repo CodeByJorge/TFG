@@ -1,4 +1,4 @@
-﻿# Tienda de Comercio Electrónico
+# Tienda de Comercio Electrónico
 
 Aplicación web para explorar, filtrar y gestionar productos de moda. El proyecto está dividido en un frontend en React y un backend en Spring Boot, con autenticación, favoritos, carrito y administración.
 
@@ -103,10 +103,12 @@ Para pararlo:
 .\stop-docker.ps1
 ```
 
-Servicios expuestos:
+Servicios expuestos (por defecto sin `.env`):
 
 - Frontend: http://localhost:8081
 - Backend: http://localhost:8000
 - Base de datos: localhost:3306
+
+Si el **puerto 8000** está ocupado (p. ej. Spring Boot en local), usa un `.env` en la raíz con `BACKEND_HOST_PORT` y `VITE_API_BASE_URL` alineados (plantilla: `docker.env.example`). Tras cambiar `VITE_API_BASE_URL`, vuelve a levantar con `--build` (lo hace `start-docker.ps1`).
 
 La primera vez, Docker importará el backup `producto-catalogo-backup-20250605.sql` en MySQL 8.

@@ -12,7 +12,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: Admin123!@#2024
     ports:
-      - "3306:3306"
+      - "${DB_HOST_PORT:-3306}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./producto-catalogo-backup-20250605.sql:/docker-entrypoint-initdb.d/01-backup.sql:ro
@@ -38,20 +38,20 @@ services:
       JWT_SECRET: replace-this-with-a-long-random-secret-key-123456
       JAVA_OPTS: -Xms256m -Xmx512m
     ports:
-      - "8000:8000"
+      - "${BACKEND_HOST_PORT:-8000}:8000"
 
   frontend:
     build:
       context: ./ecom-catalog-react.Frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_BASE_URL: http://localhost:8000
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
     container_name: tfg-frontend
     restart: unless-stopped
     depends_on:
       - backend
     ports:
-      - "8081:80"
+      - "${FRONTEND_HOST_PORT:-8081}:80"
 
 volumes:
   mysql_data:
