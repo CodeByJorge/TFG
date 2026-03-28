@@ -1,6 +1,9 @@
 package com.producto.productocatalogo.controller;
 
 import com.producto.productocatalogo.Service.UsuarioService;
+import com.producto.productocatalogo.dto.CambioPasswordDTO;
+import com.producto.productocatalogo.dto.CambioEmailDTO;
+import com.producto.productocatalogo.dto.RegistroDTO;
 import com.producto.productocatalogo.model.Usuario;
 import com.producto.productocatalogo.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,13 +105,17 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> createUsuario(@RequestBody RegistroDTO dto) {
         try {
+            Usuario usuario = new Usuario();
+            usuario.setNombre(dto.getNombre());
+            usuario.setEmail(dto.getEmail());
+            usuario.setPassword(dto.getPassword());
             Usuario nuevoUsuario = usuarioService.createUsuario(usuario);
             return ResponseEntity.ok(nuevoUsuario);
         } catch (RuntimeException e) {
             logger.error("Error al crear usuario: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
 
@@ -130,5 +137,39 @@ public class UsuarioController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<?> cambiarPassword(@PathVariable Long id, @RequestBody CambioPasswordDTO dto) {
+        Optional<Usuario> usuarioOpt = usuarioService.getUsuarioById(id);
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(404).body(Map.of("error", "Usuario no encontrado"));
+        }
+        Usuario usuario = usuarioOpt.get();
+        if (!passwordEncoder.matches(dto.getPasswordActual(), usuario.getPassword())) {
+            return ResponseEntity.status(400).body(Map.of("error", "La contraseña actual no es correcta"));
+        }
+        usuario.setPassword(passwordEncoder.encode(dto.getPasswordNueva()));
+        usuarioService.updateUsuario(id, usuario);
+        return ResponseEntity.ok(Map.of("message", "Contraseña actualizada correctamente"));
+    }
+
+    @PutMapping("/{id}/email")
+    public ResponseEntity<?> cambiarEmail(@PathVariable Long id, @RequestBody CambioEmailDTO dto) {
+        Optional<Usuario> usuarioOpt = usuarioService.getUsuarioById(id);
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(404).body(Map.of("error", "Usuario no encontrado"));
+        }
+        Usuario usuario = usuarioOpt.get();
+        if (!passwordEncoder.matches(dto.getPassword(), usuario.getPassword())) {
+            return ResponseEntity.status(400).body(Map.of("error", "La contraseña no es correcta"));
+        }
+        Optional<Usuario> existente = usuarioService.getUsuarioByEmail(dto.getEmailNuevo());
+        if (existente.isPresent() && !existente.get().getId().equals(id)) {
+            return ResponseEntity.status(400).body(Map.of("error", "El email ya está en uso"));
+        }
+        usuario.setEmail(dto.getEmailNuevo());
+        usuarioService.updateUsuario(id, usuario);
+        return ResponseEntity.ok(Map.of("message", "Email actualizado correctamente", "email", dto.getEmailNuevo()));
     }
 } 

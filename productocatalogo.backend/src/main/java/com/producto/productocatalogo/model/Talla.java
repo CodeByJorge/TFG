@@ -1,5 +1,6 @@
 package com.producto.productocatalogo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class Talla {
     @Column(nullable = false, unique = true)
     private String nombre; // Por ejemplo: "S", "M", "L", "XL", "38", "40", etc.
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "tallas")
     private Set<Producto> productos = new HashSet<>();
 } 
