@@ -199,74 +199,158 @@
   border-top: 1px solid var(--fashion-line);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  align-items: center;
+  gap: 0.7rem;
+  align-items: flex-start;
 }
 
 .cart-payment-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fashion-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fashion-text);
 }
 
-.cart-payment-icons {
+.cart-payment-grid {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
-.cart-payment-badge {
+/* Base badge */
+.cpb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 34px;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  width: 56px;
+  height: 36px;
+  border-radius: 7px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   font-family: Arial, sans-serif;
+  font-size: 0.7rem;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.cart-payment-visa {
+/* Visa */
+.cpb-visa {
   background: #1A1F71;
   color: #fff;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
 }
 
-.cart-payment-mastercard {
-  background: #1a1a1a;
+.cpb-visa em {
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  font-family: "Times New Roman", serif;
+}
+
+/* Mastercard */
+.cpb-mastercard {
+  background: #fff;
   position: relative;
-  gap: 0;
 }
 
-.mc-circle {
+.mc-c {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   position: absolute;
 }
 
-.mc-red {
+.mc-c--red {
   background: #EB001B;
-  left: 8px;
+  left: 9px;
 }
 
-.mc-yellow {
+.mc-c--yellow {
   background: #F79E1B;
-  right: 8px;
-  mix-blend-mode: screen;
+  right: 9px;
+  opacity: 0.9;
 }
 
-.cart-payment-paypal {
-  background: #F6F8FA;
-  border: 1px solid rgba(0,0,0,0.08);
-  font-size: 0.8rem;
-  gap: 1px;
+/* Amex */
+.cpb-amex {
+  background: linear-gradient(135deg, #2E77BC 0%, #1a5fa0 100%);
+  color: #fff;
+  flex-direction: column;
+  gap: 0;
+}
+
+.amex-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.amex-top {
+  font-size: 0.42rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.amex-mid {
+  font-size: 0.5rem;
+  letter-spacing: 0.03em;
+  font-weight: 900;
+}
+
+/* Klarna */
+.cpb-klarna {
+  background: #FFB3C7;
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cpb-klarna b {
+  color: #000;
+}
+
+/* Apple Pay */
+.cpb-applepay {
+  background: #fff;
+  color: #000;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* PayPal */
+.cpb-paypal {
+  background: #fff;
+  color: #003087;
+  font-size: 0.72rem;
+  font-weight: 900;
+  gap: 0;
+  letter-spacing: -0.01em;
+}
+
+.pp-p {
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1;
+}
+
+.pp-p--blue {
+  color: #003087;
+}
+
+.pp-p--light {
+  color: #009CDE;
+  margin-left: -3px;
+}
+
+.pp-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #003087;
+  margin-left: 1px;
 }
 
 @media (max-width: 980px) {

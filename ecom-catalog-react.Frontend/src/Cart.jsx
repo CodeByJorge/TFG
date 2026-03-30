@@ -179,16 +179,40 @@ const Cart = () => {
             </Link>
 
             <div className="cart-payment-methods">
-              <span className="cart-payment-label">Pago seguro con</span>
-              <div className="cart-payment-icons">
-                <span className="cart-payment-badge cart-payment-visa">VISA</span>
-                <span className="cart-payment-badge cart-payment-mastercard">
-                  <span className="mc-circle mc-red" />
-                  <span className="mc-circle mc-yellow" />
+              <span className="cart-payment-label">Aceptamos</span>
+              <div className="cart-payment-grid">
+                {/* Visa */}
+                <span className="cpb cpb-visa">
+                  <em>VISA</em>
                 </span>
-                <span className="cart-payment-badge cart-payment-paypal">
-                  <span style={{ color: '#003087', fontWeight: 800 }}>Pay</span>
-                  <span style={{ color: '#009CDE', fontWeight: 800 }}>Pal</span>
+                {/* Mastercard */}
+                <span className="cpb cpb-mastercard">
+                  <span className="mc-c mc-c--red" />
+                  <span className="mc-c mc-c--yellow" />
+                </span>
+                {/* Amex */}
+                <span className="cpb cpb-amex">
+                  <span className="amex-inner">
+                    <span className="amex-top">AMERICAN</span>
+                    <span className="amex-mid">EXPRESS</span>
+                  </span>
+                </span>
+                {/* Klarna */}
+                <span className="cpb cpb-klarna">
+                  <span>Klarna<b>.</b></span>
+                </span>
+                {/* Apple Pay */}
+                <span className="cpb cpb-applepay">
+                  <svg width="14" height="14" viewBox="0 0 814 1000" fill="currentColor" aria-hidden="true">
+                    <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 376.6 0 279.2 0 186.9 0 74.6 61.3 14.4 120.3 14.4c50.7 0 92.9 33.6 124.8 33.6 30.4 0 78.1-35.8 136.4-35.8 23.4 0 108.2 1.9 162.6 86.6zM390.2 93.7c-21.2-28.4-56.3-50.1-91.4-50.1-4.9 0-9.7.6-13 1.3-1.3 26.6 9.7 53.9 29.2 72.7 18.6 18.6 47.7 32.4 73.7 32.4 4.5 0 9.1-.6 12.4-1.3.6-27.2-9.1-53.3-10.9-55z"/>
+                  </svg>
+                  <span>Pay</span>
+                </span>
+                {/* PayPal */}
+                <span className="cpb cpb-paypal">
+                  <span className="pp-p pp-p--blue">P</span>
+                  <span className="pp-p pp-p--light">P</span>
+                  <span className="pp-text">ayPal</span>
                 </span>
               </div>
             </div>
