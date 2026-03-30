@@ -193,6 +193,36 @@
   padding: 0.35rem 0;
 }
 
+.cart-payment-methods {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--fashion-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.cart-payment-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fashion-muted);
+}
+
+.cart-payment-icons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cart-payment-icon {
+  width: 48px;
+  height: 32px;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
 @media (max-width: 980px) {
   .cart-layout {
     grid-template-columns: 1fr;

@@ -178,6 +178,30 @@ const Cart = () => {
 
             </Link>
 
+            <div className="cart-payment-methods">
+              <span className="cart-payment-label">Pago seguro con</span>
+              <div className="cart-payment-icons">
+                {/* Visa */}
+                <svg className="cart-payment-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" aria-label="Visa">
+                  <rect width="48" height="32" rx="5" fill="#1A1F71"/>
+                  <text x="7" y="22" fontFamily="Arial" fontWeight="bold" fontSize="14" fill="#fff" letterSpacing="1">VISA</text>
+                </svg>
+                {/* Mastercard */}
+                <svg className="cart-payment-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard">
+                  <rect width="48" height="32" rx="5" fill="#252525"/>
+                  <circle cx="18" cy="16" r="9" fill="#EB001B"/>
+                  <circle cx="30" cy="16" r="9" fill="#F79E1B"/>
+                  <path d="M24 9.3a9 9 0 0 1 0 13.4A9 9 0 0 1 24 9.3z" fill="#FF5F00"/>
+                </svg>
+                {/* PayPal */}
+                <svg className="cart-payment-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" aria-label="PayPal">
+                  <rect width="48" height="32" rx="5" fill="#F6F8FA"/>
+                  <text x="6" y="21" fontFamily="Arial" fontWeight="bold" fontSize="11" fill="#003087">Pay</text>
+                  <text x="21" y="21" fontFamily="Arial" fontWeight="bold" fontSize="11" fill="#009CDE">Pal</text>
+                </svg>
+              </div>
+            </div>
+
           </aside>
 
         </div>
