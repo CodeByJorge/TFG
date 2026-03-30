@@ -216,11 +216,57 @@
   align-items: center;
 }
 
-.cart-payment-icon {
-  width: 48px;
-  height: 32px;
-  border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+.cart-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 34px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-family: Arial, sans-serif;
+}
+
+.cart-payment-visa {
+  background: #1A1F71;
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+.cart-payment-mastercard {
+  background: #1a1a1a;
+  position: relative;
+  gap: 0;
+}
+
+.mc-circle {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.mc-red {
+  background: #EB001B;
+  left: 8px;
+}
+
+.mc-yellow {
+  background: #F79E1B;
+  right: 8px;
+  mix-blend-mode: screen;
+}
+
+.cart-payment-paypal {
+  background: #F6F8FA;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.8rem;
+  gap: 1px;
 }
 
 @media (max-width: 980px) {
