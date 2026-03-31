@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { useCart } from '../contexts/CartContext';
@@ -76,70 +76,70 @@ const ProductCard = ({
 
   return (
     <article className="card product-card">
-      <div className="image-container">
+      <Link to={`/producto/${product.id}`} className="image-container">
         <img
           src={product.imagenUrl}
           alt={product.nombre}
           className="card-img-top product-image"
         />
         <div className="product-card-gradient" />
+      </Link>
 
-        {showFavoriteButton && (
-          <button
-            ref={favoriteButtonRef}
-            className={`favorite-btn ${isFavorite ? 'active' : ''}`}
-            onClick={handleFavoriteClick}
-            disabled={isLoading}
-            aria-label="Guardar en favoritos"
+      {showFavoriteButton && (
+        <button
+          ref={favoriteButtonRef}
+          className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+          onClick={handleFavoriteClick}
+          disabled={isLoading}
+          aria-label="Guardar en favoritos"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={isFavorite ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            strokeWidth="2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill={isFavorite ? 'currentColor' : 'none'}
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </button>
-        )}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </button>
+      )}
 
-        {isFavoritesPage && (
-          <button
-            className="cart-btn"
-            onClick={handleAddToCart}
-            disabled={isAddingToCart}
-            title="Agregar al carrito"
-            aria-label="Agregar al carrito"
+      {isFavoritesPage && (
+        <button
+          className="cart-btn"
+          onClick={handleAddToCart}
+          disabled={isAddingToCart}
+          title="Agregar al carrito"
+          aria-label="Agregar al carrito"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-          </button>
-        )}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+        </button>
+      )}
 
-        {showNotification && (
-          <div className="cart-notification">
-            Producto añadido al carrito
-          </div>
-        )}
-      </div>
+      {showNotification && (
+        <div className="cart-notification">
+          Producto añadido al carrito
+        </div>
+      )}
 
-      <div className="card-body product-info">
+      <Link to={`/producto/${product.id}`} className="card-body product-info">
         <div className="product-copy">
           {product.stock === 0 ? (
             <span className="product-kicker" style={{ color: '#888', background: 'rgba(0,0,0,0.05)', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.68rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Agotado</span>
@@ -153,7 +153,7 @@ const ProductCard = ({
         </div>
 
         <div className="product-footer">
-          <strong className="product-price">{product.precio} EUR</strong>
+          <strong className="product-price">{product.precio} €</strong>
           <div className="tallas-lista">
             {sizes.length > 0 ? (
               sizes.map((size) => (
@@ -166,7 +166,7 @@ const ProductCard = ({
             )}
           </div>
         </div>
-      </div>
+      </Link>
     </article>
   );
 };

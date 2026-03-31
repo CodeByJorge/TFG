@@ -37,6 +37,7 @@ import SearchResult from './components/SearchResult';
 import TodosProductosMujer from './pages/TodosProductosMujer';
 import TodosProductosHombre from './pages/TodosProductosHombre';
 import MiCuenta from './pages/MiCuenta';
+import ProductoDetalle from './pages/ProductoDetalle';
 
 function App() {
   const HeaderWrapper = () => <HeaderMinimalista />;
@@ -73,6 +74,7 @@ function App() {
                     <Route path="/mujeres/rebajas" element={<CatalogPage apiUrl={`${config.PRODUCTS_URL}/genero/nombre/Mujeres`} title="Rebajas" subtitle="Las mejores ofertas en moda" section="mujer" eyebrow="Sale" description="Productos seleccionados con descuento." filtro="rebajas" />} />
                     <Route path="/todos-productos-mujer" element={<TodosProductosMujer />} />
                     <Route path="/todos-productos-hombre" element={<TodosProductosHombre />} />
+                    <Route path="/producto/:id" element={<ProductoDetalle />} />
                     <Route path="/favoritos" element={<Favoritos />} />
                     <Route path="/colecciones" element={<Colecciones />} />
                     <Route path="/login" element={<Login />} />
