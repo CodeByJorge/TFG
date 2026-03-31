@@ -18,6 +18,8 @@ public class Producto {
     @Column(nullable = false)
     private Integer stock = 10;
 
+    private String colores;
+
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
