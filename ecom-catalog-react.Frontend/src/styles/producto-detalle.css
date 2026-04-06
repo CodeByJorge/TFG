@@ -259,8 +259,7 @@
   height: 52px;
   border-radius: 999px;
   border: 1px solid var(--fashion-line);
-  background: #fff;
-  color: var(--fashion-text);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -275,9 +274,7 @@
 }
 
 .pd-favorite-btn.active {
-  background: var(--fashion-text);
-  color: #fff;
-  border-color: var(--fashion-text);
+  border-color: #EF4444;
 }
 
 /* Info envio */

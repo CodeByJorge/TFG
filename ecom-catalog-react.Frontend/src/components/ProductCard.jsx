@@ -96,8 +96,10 @@ const ProductCard = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill={isFavorite ? 'currentColor' : 'none'}
-            stroke="currentColor"
+            width="26"
+            height="26"
+            fill={isFavorite ? '#EF4444' : 'none'}
+            stroke={isFavorite ? '#EF4444' : '#fff'}
             strokeWidth="2"
           >
             <path
